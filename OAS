@@ -1,0 +1,5650 @@
+{
+  "swaggerDoc": {
+    "openapi": "3.0.3",
+    "info": {
+      "title": "REST API for Quickskill",
+      "version": "1.0.0",
+      "description": "This is the REST API for Quickskill"
+    },
+    "servers": [
+      {
+        "url": "/api"
+      }
+    ],
+    "tags": [
+      {
+        "name": "Category",
+        "description": "Category management endpoints"
+      },
+      {
+        "name": "Blog",
+        "description": "Blog category management endpoints"
+      },
+      {
+        "name": "Reviews",
+        "description": "Operations related to course reviews"
+      },
+      {
+        "name": "Users",
+        "description": "Operations related to user management"
+      },
+      {
+        "name": "Admin Courses",
+        "description": "Operations related to course management for administrators"
+      },
+      {
+        "name": "Authentication",
+        "description": "Operations related to user authentication and session management"
+      }
+    ],
+    "components": {
+      "securitySchemes": {
+        "bearerAuth": {
+          "type": "http",
+          "scheme": "bearer",
+          "bearerFormat": "JWT"
+        }
+      },
+      "schemas": {
+        "Category": {
+          "type": "object",
+          "properties": {
+            "_id": {
+              "type": "string",
+              "example": "64a1b2c3d4e5f67890123456"
+            },
+            "name": {
+              "type": "string",
+              "example": "Electronics"
+            },
+            "parent": {
+              "type": "string",
+              "nullable": true,
+              "example": null
+            },
+            "level": {
+              "type": "integer",
+              "example": 0
+            },
+            "isActive": {
+              "type": "boolean",
+              "example": true
+            }
+          }
+        },
+        "CategoryTree": {
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/Category"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "children": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CategoryTree"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "Error": {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string",
+              "example": "Internal server error",
+              "description": "Error message"
+            },
+            "details": {
+              "type": "string",
+              "items": {
+                "type": "string"
+              },
+              "description": "Additional error details",
+              "nullable": true
+            },
+            "message": {
+              "type": "string",
+              "description": "Main error message",
+              "nullable": true
+            },
+            "gracePeriodExpired": {
+              "type": "boolean",
+              "description": "Indicates if the grace period has expired",
+              "nullable": true
+            },
+            "loginPrevented": {
+              "type": "boolean",
+              "description": "Indicates if login is prevented due to expired grace period",
+              "nullable": true
+            },
+            "shouldLogout": {
+              "type": "boolean",
+              "description": "Indicates if the client should log out",
+              "nullable": true
+            }
+          },
+          "required": [
+            "error"
+          ]
+        },
+        "BlogCategory": {
+          "type": "object",
+          "properties": {
+            "_id": {
+              "type": "string",
+              "description": "Unique identifier for the category"
+            },
+            "name": {
+              "type": "string",
+              "description": "Name of the blog category",
+              "maxLength": 100
+            },
+            "subTitle": {
+              "type": "string",
+              "description": "Subtitle for the category"
+            },
+            "slug": {
+              "type": "string",
+              "description": "URL-friendly slug for the category"
+            },
+            "createdBy": {
+              "type": "string",
+              "description": "ID of the user who created the category"
+            },
+            "featured": {
+              "type": "boolean",
+              "description": "Indicates if the category is featured",
+              "default": false
+            },
+            "createdAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Creation timestamp"
+            },
+            "updatedAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Last update timestamp"
+            }
+          },
+          "required": [
+            "name",
+            "subTitle",
+            "slug",
+            "createdBy"
+          ]
+        },
+        "BlogPost": {
+          "type": "object",
+          "properties": {
+            "_id": {
+              "type": "string",
+              "description": "Unique identifier for the blog post"
+            },
+            "title": {
+              "type": "string",
+              "description": "Title of the blog post"
+            },
+            "slug": {
+              "type": "string",
+              "description": "URL-friendly slug for the blog post"
+            },
+            "excerpt": {
+              "type": "string",
+              "description": "Short summary of the blog post"
+            },
+            "content": {
+              "type": "string",
+              "description": "Full content of the blog post"
+            },
+            "author": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "description": "Author ID"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "Author name"
+                },
+                "email": {
+                  "type": "string",
+                  "description": "Author email"
+                },
+                "picture": {
+                  "type": "string",
+                  "description": "Author picture URL",
+                  "nullable": true
+                }
+              }
+            },
+            "publishedAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Publication date"
+            },
+            "published": {
+              "type": "boolean",
+              "description": "Indicates if the post is published",
+              "default": true
+            },
+            "readTime": {
+              "type": "integer",
+              "description": "Estimated reading time in minutes"
+            },
+            "category": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "description": "Category ID"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "Category name"
+                },
+                "slug": {
+                  "type": "string",
+                  "description": "Category slug"
+                },
+                "subTitle": {
+                  "type": "string",
+                  "description": "Category subtitle"
+                }
+              }
+            },
+            "tags": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Tags associated with the blog post"
+            },
+            "featured": {
+              "type": "boolean",
+              "description": "Indicates if the post is featured",
+              "default": false
+            },
+            "imageUrl": {
+              "type": "string",
+              "description": "URL of the featured image",
+              "nullable": true
+            },
+            "readCount": {
+              "type": "integer",
+              "description": "Number of times the post has been read",
+              "default": 0
+            },
+            "createdAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Creation timestamp"
+            },
+            "updatedAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Last update timestamp"
+            }
+          },
+          "required": [
+            "title",
+            "slug",
+            "excerpt",
+            "content",
+            "author",
+            "publishedAt",
+            "readTime",
+            "category"
+          ]
+        },
+        "Course": {
+          "type": "object",
+          "properties": {
+            "_id": {
+              "type": "string",
+              "description": "Unique identifier for the course"
+            },
+            "title": {
+              "type": "string",
+              "description": "Course title",
+              "maxLength": 100
+            },
+            "slug": {
+              "type": "string",
+              "description": "URL-friendly slug for the course"
+            },
+            "thumbnail": {
+              "type": "string",
+              "description": "URL of the course thumbnail",
+              "nullable": true
+            },
+            "instructors": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "_id": {
+                    "type": "string",
+                    "description": "Instructor ID"
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "Instructor name"
+                  }
+                }
+              },
+              "description": "List of instructors for the course"
+            },
+            "originalPrice": {
+              "type": "number",
+              "description": "Original price of the course",
+              "nullable": true,
+              "minimum": 0
+            },
+            "price": {
+              "type": "number",
+              "description": "Current price of the course",
+              "minimum": 0
+            },
+            "whatYouWillLearn": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Learning objectives"
+            },
+            "shortDescription": {
+              "type": "string",
+              "description": "Short description of the course",
+              "maxLength": 200
+            },
+            "level": {
+              "type": "string",
+              "description": "Course difficulty level",
+              "enum": [
+                "beginner",
+                "intermediate",
+                "advanced"
+              ]
+            },
+            "rating": {
+              "type": "number",
+              "description": "Average rating of the course",
+              "minimum": 0,
+              "maximum": 5,
+              "default": 0
+            },
+            "totalRatings": {
+              "type": "integer",
+              "description": "Total number of ratings",
+              "default": 0
+            },
+            "createdAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Creation timestamp"
+            },
+            "updatedAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Last update timestamp"
+            },
+            "description": {
+              "type": "string",
+              "description": "Detailed course description",
+              "maxLength": 2000
+            },
+            "thumbnailKey": {
+              "type": "string",
+              "description": "S3 key for the thumbnail",
+              "nullable": true
+            },
+            "appleProductId": {
+              "type": "string",
+              "description": "Apple product ID for in-app purchases",
+              "default": ""
+            },
+            "category": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "description": "Category ID"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "Category name"
+                }
+              },
+              "description": "Course category"
+            },
+            "tags": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Tags associated with the course"
+            },
+            "language": {
+              "type": "string",
+              "description": "Course language",
+              "default": "English"
+            },
+            "requirements": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Course prerequisites"
+            },
+            "isFeatured": {
+              "type": "boolean",
+              "description": "Indicates if the course is featured",
+              "default": false
+            },
+            "isPublished": {
+              "type": "boolean",
+              "description": "Indicates if the course is published",
+              "default": false
+            },
+            "lessons": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "List of lesson IDs"
+            },
+            "totalLessons": {
+              "type": "integer",
+              "description": "Total number of lessons",
+              "default": 0
+            },
+            "subscriptionPlan": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "description": "Subscription plan ID"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "Subscription plan name"
+                },
+                "level": {
+                  "type": "string",
+                  "description": "Subscription plan level"
+                }
+              },
+              "description": "Associated subscription plan",
+              "nullable": true
+            }
+          },
+          "required": [
+            "title",
+            "slug",
+            "description",
+            "shortDescription",
+            "instructors",
+            "price",
+            "level",
+            "category"
+          ]
+        },
+        "Review": {
+          "type": "object",
+          "properties": {
+            "_id": {
+              "type": "string",
+              "description": "Unique identifier for the review"
+            },
+            "user": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "description": "User ID"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "User name"
+                },
+                "email": {
+                  "type": "string",
+                  "description": "User email"
+                },
+                "avatar": {
+                  "type": "string",
+                  "description": "User avatar URL",
+                  "nullable": true
+                },
+                "picture": {
+                  "type": "string",
+                  "description": "User picture URL",
+                  "nullable": true
+                }
+              },
+              "description": "User who submitted the review"
+            },
+            "course": {
+              "type": "string",
+              "description": "ID of the course being reviewed"
+            },
+            "rating": {
+              "type": "integer",
+              "description": "Rating given to the course (1 to 5)",
+              "minimum": 1,
+              "maximum": 5
+            },
+            "comment": {
+              "type": "string",
+              "description": "Review comment",
+              "minLength": 10,
+              "maxLength": 1000
+            },
+            "isApproved": {
+              "type": "boolean",
+              "description": "Indicates if the review is approved",
+              "default": true
+            },
+            "createdAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Creation timestamp"
+            },
+            "updatedAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Last update timestamp"
+            }
+          },
+          "required": [
+            "user",
+            "course",
+            "rating",
+            "comment"
+          ]
+        },
+        "User": {
+          "type": "object",
+          "properties": {
+            "_id": {
+              "type": "string",
+              "description": "Unique identifier for the user"
+            },
+            "googleId": {
+              "type": "string",
+              "description": "Google ID for authentication",
+              "nullable": true
+            },
+            "appleId": {
+              "type": "string",
+              "description": "Apple ID for authentication",
+              "nullable": true
+            },
+            "email": {
+              "type": "string",
+              "description": "User's email address"
+            },
+            "name": {
+              "type": "string",
+              "description": "User's name"
+            },
+            "picture": {
+              "type": "string",
+              "description": "URL of the user's profile picture",
+              "nullable": true
+            },
+            "role": {
+              "type": "string",
+              "enum": [
+                "admin",
+                "user"
+              ],
+              "description": "User's role",
+              "default": "user"
+            },
+            "isActive": {
+              "type": "boolean",
+              "description": "Indicates if the user account is active",
+              "default": true
+            },
+            "stripeCustomerId": {
+              "type": "string",
+              "description": "Stripe customer ID for payment processing",
+              "nullable": true
+            },
+            "isDeleted": {
+              "type": "boolean",
+              "description": "Indicates if the account is marked for deletion",
+              "default": false
+            },
+            "deletedAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Timestamp when the account was marked for deletion",
+              "nullable": true
+            },
+            "deletionScheduledAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Timestamp when the account is scheduled for permanent deletion",
+              "nullable": true
+            },
+            "deletionReason": {
+              "type": "string",
+              "description": "Reason for account deletion",
+              "nullable": true
+            },
+            "createdAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Creation timestamp"
+            },
+            "updatedAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Last update timestamp"
+            }
+          },
+          "required": [
+            "email",
+            "name"
+          ]
+        },
+        "DeletionStatus": {
+          "type": "object",
+          "properties": {
+            "isDeleted": {
+              "type": "boolean",
+              "description": "Indicates if the account is marked for deletion"
+            },
+            "deletedAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Timestamp when the account was marked for deletion",
+              "nullable": true
+            },
+            "deletionScheduledAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Timestamp when the account is scheduled for permanent deletion",
+              "nullable": true
+            },
+            "deletionReason": {
+              "type": "string",
+              "description": "Reason for account deletion",
+              "nullable": true
+            },
+            "daysLeft": {
+              "type": "integer",
+              "description": "Number of days left in the grace period",
+              "nullable": true
+            },
+            "canRestore": {
+              "type": "boolean",
+              "description": "Indicates if the account can still be restored",
+              "nullable": true
+            },
+            "message": {
+              "type": "string",
+              "description": "Status message"
+            }
+          },
+          "required": [
+            "isDeleted",
+            "message"
+          ]
+        },
+        "Enrollment": {
+          "type": "object",
+          "properties": {
+            "_id": {
+              "type": "string",
+              "description": "Unique identifier for the enrollment"
+            },
+            "user": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "description": "User ID"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "User name"
+                },
+                "email": {
+                  "type": "string",
+                  "description": "User email"
+                }
+              },
+              "description": "User enrolled in the course"
+            },
+            "course": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "description": "Course ID"
+                },
+                "title": {
+                  "type": "string",
+                  "description": "Course title"
+                },
+                "description": {
+                  "type": "string",
+                  "description": "Course description"
+                },
+                "thumbnail": {
+                  "type": "string",
+                  "description": "Course thumbnail URL",
+                  "nullable": true
+                },
+                "price": {
+                  "type": "number",
+                  "description": "Course price"
+                },
+                "level": {
+                  "type": "string",
+                  "enum": [
+                    "beginner",
+                    "intermediate",
+                    "advanced"
+                  ],
+                  "description": "Course difficulty level"
+                },
+                "category": {
+                  "type": "string",
+                  "description": "Course category ID"
+                },
+                "instructors": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "_id": {
+                        "type": "string",
+                        "description": "Instructor ID"
+                      },
+                      "name": {
+                        "type": "string",
+                        "description": "Instructor name"
+                      },
+                      "email": {
+                        "type": "string",
+                        "description": "Instructor email"
+                      },
+                      "bio": {
+                        "type": "string",
+                        "description": "Instructor biography",
+                        "nullable": true
+                      },
+                      "profilePicture": {
+                        "type": "string",
+                        "description": "Instructor profile picture URL",
+                        "nullable": true
+                      }
+                    }
+                  },
+                  "description": "List of course instructors"
+                }
+              },
+              "description": "Course details"
+            },
+            "enrolledAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Timestamp when the user enrolled"
+            },
+            "progress": {
+              "type": "number",
+              "description": "Enrollment progress percentage",
+              "minimum": 0,
+              "maximum": 100,
+              "default": 0
+            },
+            "completedLessons": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "List of completed lesson IDs"
+            },
+            "isCompleted": {
+              "type": "boolean",
+              "description": "Indicates if the course is completed",
+              "default": false
+            },
+            "completedAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Timestamp when the course was completed",
+              "nullable": true
+            },
+            "createdAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Creation timestamp"
+            },
+            "updatedAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Last update timestamp"
+            }
+          },
+          "required": [
+            "user",
+            "course",
+            "enrolledAt"
+          ]
+        },
+        "EnrollmentWithProgress": {
+          "type": "object",
+          "properties": {
+            "_id": {
+              "type": "string",
+              "description": "Enrollment ID"
+            },
+            "course": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "description": "Course ID"
+                },
+                "title": {
+                  "type": "string",
+                  "description": "Course title"
+                },
+                "description": {
+                  "type": "string",
+                  "description": "Course description"
+                },
+                "thumbnail": {
+                  "type": "string",
+                  "description": "Course thumbnail URL",
+                  "nullable": true
+                },
+                "price": {
+                  "type": "number",
+                  "description": "Course price"
+                },
+                "level": {
+                  "type": "string",
+                  "enum": [
+                    "beginner",
+                    "intermediate",
+                    "advanced"
+                  ],
+                  "description": "Course difficulty level"
+                },
+                "category": {
+                  "type": "string",
+                  "description": "Course category ID"
+                },
+                "instructors": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "_id": {
+                        "type": "string",
+                        "description": "Instructor ID"
+                      },
+                      "name": {
+                        "type": "string",
+                        "description": "Instructor name"
+                      },
+                      "email": {
+                        "type": "string",
+                        "description": "Instructor email"
+                      },
+                      "bio": {
+                        "type": "string",
+                        "description": "Instructor biography",
+                        "nullable": true
+                      },
+                      "profilePicture": {
+                        "type": "string",
+                        "description": "Instructor profile picture URL",
+                        "nullable": true
+                      }
+                    }
+                  },
+                  "description": "List of course instructors"
+                }
+              },
+              "description": "Course details"
+            },
+            "progress": {
+              "type": "number",
+              "description": "Progress percentage",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "isCompleted": {
+              "type": "boolean",
+              "description": "Indicates if the course is completed"
+            },
+            "enrolledAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Timestamp when the user enrolled"
+            },
+            "completedAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Timestamp when the course was completed",
+              "nullable": true
+            },
+            "timeSpent": {
+              "type": "number",
+              "description": "Total time spent on the course in seconds"
+            },
+            "lastAccessed": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Timestamp of last access"
+            }
+          },
+          "required": [
+            "_id",
+            "course",
+            "progress",
+            "isCompleted",
+            "enrolledAt",
+            "timeSpent",
+            "lastAccessed"
+          ]
+        }
+      }
+    },
+    "security": [
+      {
+        "bearerAuth": []
+      }
+    ],
+    "paths": {
+      "/categories": {
+        "get": {
+          "tags": [
+            "Category"
+          ],
+          "summary": "Get all categories with hierarchy",
+          "description": "Retrieves a hierarchical tree of categories, optionally including inactive ones",
+          "operationId": "getCategories",
+          "parameters": [
+            {
+              "name": "includeInactive",
+              "in": "query",
+              "description": "Include inactive categories if true",
+              "required": false,
+              "schema": {
+                "type": "boolean",
+                "default": false
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful response with category tree",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "categories": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/components/schemas/Category"
+                        }
+                      },
+                      "total": {
+                        "type": "integer",
+                        "description": "Total number of categories"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "post": {
+          "tags": [
+            "Category"
+          ],
+          "summary": "Create a new category",
+          "description": "Creates a new category (admin only)",
+          "operationId": "createCategory",
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "Name of the category",
+                      "maxLength": 100
+                    },
+                    "icon": {
+                      "type": "string",
+                      "description": "Optional icon for the category",
+                      "nullable": true
+                    },
+                    "description": {
+                      "type": "string",
+                      "description": "Optional description of the category",
+                      "maxLength": 500,
+                      "nullable": true
+                    },
+                    "parentId": {
+                      "type": "string",
+                      "description": "ID of the parent category",
+                      "nullable": true
+                    }
+                  },
+                  "required": [
+                    "name"
+                  ]
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Category created successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string",
+                        "description": "Success message"
+                      },
+                      "category": {
+                        "$ref": "#/components/schemas/Category"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request (e.g., missing name, duplicate slug, invalid parent)",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/categories/flat": {
+        "get": {
+          "tags": [
+            "Category"
+          ],
+          "summary": "Get categories as a flat list",
+          "description": "Retrieves a paginated flat list of active categories (admin only)",
+          "operationId": "getFlatCategories",
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "parameters": [
+            {
+              "name": "page",
+              "in": "query",
+              "description": "Page number for pagination",
+              "required": false,
+              "schema": {
+                "type": "integer",
+                "default": 1
+              }
+            },
+            {
+              "name": "limit",
+              "in": "query",
+              "description": "Number of categories per page",
+              "required": false,
+              "schema": {
+                "type": "integer",
+                "default": 10
+              }
+            },
+            {
+              "name": "search",
+              "in": "query",
+              "description": "Search term for category names",
+              "required": false,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful response with flat list of categories",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "categories": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "_id": {
+                              "type": "string"
+                            },
+                            "name": {
+                              "type": "string"
+                            },
+                            "slug": {
+                              "type": "string"
+                            },
+                            "level": {
+                              "type": "integer"
+                            },
+                            "parent": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "courseCount": {
+                              "type": "integer"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/categories/{id}": {
+        "get": {
+          "tags": [
+            "Category"
+          ],
+          "summary": "Get a single category",
+          "description": "Retrieves a specific category with its children",
+          "operationId": "getCategoryById",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "Category ID",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful response with category details",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "category": {
+                        "$ref": "#/components/schemas/Category"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Category not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "put": {
+          "tags": [
+            "Category"
+          ],
+          "summary": "Update a category",
+          "description": "Updates a specific category (admin only)",
+          "operationId": "updateCategory",
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "Category ID",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "Updated name of the category",
+                      "maxLength": 100
+                    },
+                    "icon": {
+                      "type": "string",
+                      "description": "Updated icon for the category",
+                      "nullable": true
+                    },
+                    "description": {
+                      "type": "string",
+                      "description": "Updated description of the category",
+                      "maxLength": 500,
+                      "nullable": true
+                    },
+                    "isActive": {
+                      "type": "boolean",
+                      "description": "Updated active status"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Category updated successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string",
+                        "description": "Success message"
+                      },
+                      "category": {
+                        "$ref": "#/components/schemas/Category"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request (e.g., duplicate slug)",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Category not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "delete": {
+          "tags": [
+            "Category"
+          ],
+          "summary": "Delete a category",
+          "description": "Deletes a specific category (admin only)",
+          "operationId": "deleteCategory",
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "Category ID",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Category deleted successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string",
+                        "description": "Success message"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request (e.g., category has subcategories or courses)",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Category not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/categories/{id}/move": {
+        "post": {
+          "tags": [
+            "Category"
+          ],
+          "summary": "Move a category to a different parent",
+          "description": "Moves a category to a new parent category (admin only)",
+          "operationId": "moveCategory",
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "Category ID to move",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "newParentId": {
+                      "type": "string",
+                      "description": "ID of the new parent category",
+                      "nullable": true
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Category moved successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string",
+                        "description": "Success message"
+                      },
+                      "category": {
+                        "$ref": "#/components/schemas/Category"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request (e.g., invalid parent, circular dependency)",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Category or parent not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/blogs/category/create": {
+        "post": {
+          "tags": [
+            "Blog"
+          ],
+          "summary": "Create a new blog category",
+          "description": "Creates a new blog category (admin only)",
+          "operationId": "createBlogCategory",
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "Name of the category",
+                      "maxLength": 100
+                    },
+                    "subTitle": {
+                      "type": "string",
+                      "description": "Subtitle for the category"
+                    },
+                    "featured": {
+                      "type": "boolean",
+                      "description": "Whether the category is featured",
+                      "default": false
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "subTitle"
+                  ]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Category created successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string",
+                        "description": "Success message"
+                      },
+                      "category": {
+                        "$ref": "#/components/schemas/BlogCategory"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request (e.g., missing required fields, duplicate name)",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/blogs/category/update/{id}": {
+        "patch": {
+          "tags": [
+            "Blog"
+          ],
+          "summary": "Update a blog category",
+          "description": "Updates a specific blog category (admin only)",
+          "operationId": "updateBlogCategory",
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "Blog category ID",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "Updated name of the category",
+                      "maxLength": 100
+                    },
+                    "subTitle": {
+                      "type": "string",
+                      "description": "Updated subtitle for the category"
+                    },
+                    "featured": {
+                      "type": "boolean",
+                      "description": "Updated featured status"
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "subTitle"
+                  ]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Category updated successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "success": {
+                        "type": "boolean"
+                      },
+                      "message": {
+                        "type": "string",
+                        "description": "Success message"
+                      },
+                      "category": {
+                        "$ref": "#/components/schemas/BlogCategory"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request (e.g., missing required fields, category not found)",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/blogs/category/delete/{id}": {
+        "delete": {
+          "tags": [
+            "Blog"
+          ],
+          "summary": "Delete a blog category",
+          "description": "Deletes a specific blog category (admin only)",
+          "operationId": "deleteBlogCategory",
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "Blog category ID",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Category deleted successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "success": {
+                        "type": "boolean"
+                      },
+                      "message": {
+                        "type": "string",
+                        "description": "Success message"
+                      },
+                      "data": {
+                        "$ref": "#/components/schemas/BlogCategory"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request (e.g., category not found, category in use)",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/blogs/create": {
+        "post": {
+          "tags": [
+            "Blog"
+          ],
+          "summary": "Create a new blog post",
+          "description": "Creates a new blog post (admin only)",
+          "operationId": "createBlogPost",
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "title": {
+                      "type": "string",
+                      "description": "Title of the blog post"
+                    },
+                    "excerpt": {
+                      "type": "string",
+                      "description": "Short summary of the blog post"
+                    },
+                    "content": {
+                      "type": "string",
+                      "description": "Full content of the blog post"
+                    },
+                    "category": {
+                      "type": "string",
+                      "description": "ID of the associated blog category"
+                    },
+                    "tags": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "Tags for the blog post"
+                    },
+                    "featured": {
+                      "type": "boolean",
+                      "description": "Whether the post is featured",
+                      "default": false
+                    },
+                    "imageUrl": {
+                      "type": "string",
+                      "description": "URL of the featured image",
+                      "nullable": true
+                    },
+                    "published": {
+                      "type": "boolean",
+                      "description": "Whether the post is published",
+                      "default": true
+                    }
+                  },
+                  "required": [
+                    "title",
+                    "excerpt",
+                    "content",
+                    "category"
+                  ]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Blog post created successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "success": {
+                        "type": "boolean"
+                      },
+                      "message": {
+                        "type": "string",
+                        "description": "Success message"
+                      },
+                      "data": {
+                        "$ref": "#/components/schemas/BlogPost"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request (e.g., missing required fields, invalid category)",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/blogs/update/{id}": {
+        "patch": {
+          "tags": [
+            "Blog"
+          ],
+          "summary": "Update a blog post",
+          "description": "Updates a specific blog post (admin only)",
+          "operationId": "updateBlogPost",
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "Blog post ID",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "title": {
+                      "type": "string",
+                      "description": "Updated title of the blog post"
+                    },
+                    "excerpt": {
+                      "type": "string",
+                      "description": "Updated summary of the blog post"
+                    },
+                    "content": {
+                      "type": "string",
+                      "description": "Updated content of the blog post"
+                    },
+                    "category": {
+                      "type": "string",
+                      "description": "Updated category ID"
+                    },
+                    "tags": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "Updated tags for the blog post"
+                    },
+                    "featured": {
+                      "type": "boolean",
+                      "description": "Updated featured status"
+                    },
+                    "imageUrl": {
+                      "type": "string",
+                      "description": "Updated URL of the featured image",
+                      "nullable": true
+                    },
+                    "published": {
+                      "type": "boolean",
+                      "description": "Updated published status"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Blog post updated successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "success": {
+                        "type": "boolean"
+                      },
+                      "message": {
+                        "type": "string",
+                        "description": "Success message"
+                      },
+                      "data": {
+                        "$ref": "#/components/schemas/BlogPost"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request (e.g., blog not found, invalid category)",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/blogs/delete/{id}": {
+        "delete": {
+          "tags": [
+            "Blog"
+          ],
+          "summary": "Delete a blog post",
+          "description": "Deletes a specific blog post (admin only)",
+          "operationId": "deleteBlogPost",
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "Blog post ID",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Blog post deleted successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "success": {
+                        "type": "boolean"
+                      },
+                      "message": {
+                        "type": "string",
+                        "description": "Success message"
+                      },
+                      "data": {
+                        "$ref": "#/components/schemas/BlogPost"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request (e.g., blog not found)",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/blogs/getblogs": {
+        "get": {
+          "tags": [
+            "Blog"
+          ],
+          "summary": "Get all blog posts",
+          "description": "Retrieves a list of blog posts with filtering and pagination",
+          "operationId": "getBlogPosts",
+          "parameters": [
+            {
+              "name": "category",
+              "in": "query",
+              "description": "Filter by category slug",
+              "required": false,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "tag",
+              "in": "query",
+              "description": "Filter by a single tag",
+              "required": false,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "featured",
+              "in": "query",
+              "description": "Filter by featured posts",
+              "required": false,
+              "schema": {
+                "type": "boolean"
+              }
+            },
+            {
+              "name": "search",
+              "in": "query",
+              "description": "Search term for title and excerpt",
+              "required": false,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "page",
+              "in": "query",
+              "description": "Page number for pagination",
+              "required": false,
+              "schema": {
+                "type": "integer",
+                "default": 1
+              }
+            },
+            {
+              "name": "limit",
+              "in": "query",
+              "description": "Number of posts per page",
+              "required": false,
+              "schema": {
+                "type": "integer",
+                "default": 20
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful response with list of blog posts",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string",
+                        "description": "Success message"
+                      },
+                      "blogs": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/components/schemas/BlogPost"
+                        }
+                      },
+                      "pagination": {
+                        "type": "object",
+                        "properties": {
+                          "current": {
+                            "type": "integer"
+                          },
+                          "total": {
+                            "type": "integer"
+                          },
+                          "limit": {
+                            "type": "integer"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/blogs/getblogsByCategory": {
+        "get": {
+          "tags": [
+            "Blog"
+          ],
+          "summary": "Get featured categories with their blogs",
+          "description": "Retrieves featured categories with up to 8 published blogs each",
+          "operationId": "getBlogsByCategory",
+          "parameters": [
+            {
+              "name": "page",
+              "in": "query",
+              "description": "Page number for pagination",
+              "required": false,
+              "schema": {
+                "type": "integer",
+                "default": 1
+              }
+            },
+            {
+              "name": "limit",
+              "in": "query",
+              "description": "Number of categories per page",
+              "required": false,
+              "schema": {
+                "type": "integer",
+                "default": 20
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful response with categories and their blogs",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string",
+                        "description": "Success message"
+                      },
+                      "categories": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "_id": {
+                              "type": "string"
+                            },
+                            "name": {
+                              "type": "string"
+                            },
+                            "subTitle": {
+                              "type": "string"
+                            },
+                            "slug": {
+                              "type": "string"
+                            },
+                            "featured": {
+                              "type": "boolean"
+                            },
+                            "createdBy": {
+                              "type": "string"
+                            },
+                            "createdAt": {
+                              "type": "string",
+                              "format": "date-time"
+                            },
+                            "updatedAt": {
+                              "type": "string",
+                              "format": "date-time"
+                            },
+                            "blogs": {
+                              "type": "array",
+                              "items": {
+                                "$ref": "#/components/schemas/BlogPost"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "pagination": {
+                        "type": "object",
+                        "properties": {
+                          "current": {
+                            "type": "integer"
+                          },
+                          "total": {
+                            "type": "integer"
+                          },
+                          "limit": {
+                            "type": "integer"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/blogs/single/{slug}": {
+        "get": {
+          "tags": [
+            "Blog"
+          ],
+          "summary": "Get a single blog post",
+          "description": "Retrieves a specific blog post by slug with optional related blogs",
+          "operationId": "getSingleBlogPost",
+          "parameters": [
+            {
+              "name": "slug",
+              "in": "path",
+              "description": "Blog post slug",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "needRelated",
+              "in": "query",
+              "description": "Include related blogs if set to 'yes'",
+              "required": false,
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "yes"
+                ]
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful response with blog post details",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string",
+                        "description": "Success message"
+                      },
+                      "blog": {
+                        "$ref": "#/components/schemas/BlogPost"
+                      },
+                      "relatedBlogs": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "_id": {
+                              "type": "string"
+                            },
+                            "title": {
+                              "type": "string"
+                            },
+                            "slug": {
+                              "type": "string"
+                            },
+                            "imageUrl": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "author": {
+                              "type": "object",
+                              "properties": {
+                                "_id": {
+                                  "type": "string"
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "email": {
+                                  "type": "string"
+                                },
+                                "picture": {
+                                  "type": "string",
+                                  "nullable": true
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request (e.g., blog not found)",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/blogs/tags": {
+        "get": {
+          "tags": [
+            "Blog"
+          ],
+          "summary": "Get blog tags",
+          "description": "Retrieves a list of unique tags from blogs and courses",
+          "operationId": "getBlogTags",
+          "parameters": [
+            {
+              "name": "limit",
+              "in": "query",
+              "description": "Maximum number of tags to return",
+              "required": false,
+              "schema": {
+                "type": "integer",
+                "default": 10
+              }
+            },
+            {
+              "name": "search",
+              "in": "query",
+              "description": "Search term to filter tags",
+              "required": false,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful response with list of tags",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "success": {
+                        "type": "boolean"
+                      },
+                      "count": {
+                        "type": "integer",
+                        "description": "Number of tags returned"
+                      },
+                      "data": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "List of unique tags"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/blogs/categories": {
+        "get": {
+          "tags": [
+            "Blog"
+          ],
+          "summary": "Get all blog categories",
+          "description": "Retrieves a list of blog categories with blog count",
+          "operationId": "getBlogCategories",
+          "parameters": [
+            {
+              "name": "page",
+              "in": "query",
+              "description": "Page number for pagination",
+              "required": false,
+              "schema": {
+                "type": "integer",
+                "default": 1
+              }
+            },
+            {
+              "name": "limit",
+              "in": "query",
+              "description": "Number of categories per page",
+              "required": false,
+              "schema": {
+                "type": "integer",
+                "default": 20
+              }
+            },
+            {
+              "name": "search",
+              "in": "query",
+              "description": "Search term for category names",
+              "required": false,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful response with list of categories",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string",
+                        "description": "Success message"
+                      },
+                      "categories": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "_id": {
+                              "type": "string"
+                            },
+                            "name": {
+                              "type": "string"
+                            },
+                            "subTitle": {
+                              "type": "string"
+                            },
+                            "slug": {
+                              "type": "string"
+                            },
+                            "featured": {
+                              "type": "boolean"
+                            },
+                            "createdBy": {
+                              "type": "string"
+                            },
+                            "createdAt": {
+                              "type": "string",
+                              "format": "date-time"
+                            },
+                            "updatedAt": {
+                              "type": "string",
+                              "format": "date-time"
+                            },
+                            "blogCount": {
+                              "type": "integer",
+                              "description": "Number of blogs in the category"
+                            }
+                          }
+                        }
+                      },
+                      "pagination": {
+                        "type": "object",
+                        "properties": {
+                          "current": {
+                            "type": "integer"
+                          },
+                          "total": {
+                            "type": "integer"
+                          },
+                          "limit": {
+                            "type": "integer"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/blogs/category/{slug}": {
+        "get": {
+          "tags": [
+            "Blog"
+          ],
+          "summary": "Get blogs by category",
+          "description": "Retrieves blogs for a specific category by slug with related courses and tags",
+          "operationId": "getBlogsBySingleCategory",
+          "parameters": [
+            {
+              "name": "slug",
+              "in": "path",
+              "description": "Category slug",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "page",
+              "in": "query",
+              "description": "Page number for pagination",
+              "required": false,
+              "schema": {
+                "type": "integer",
+                "default": 1
+              }
+            },
+            {
+              "name": "limit",
+              "in": "query",
+              "description": "Number of blogs per page",
+              "required": false,
+              "schema": {
+                "type": "integer",
+                "default": 28
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful response with category blogs and related data",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string",
+                        "description": "Success message"
+                      },
+                      "category": {
+                        "$ref": "#/components/schemas/BlogCategory"
+                      },
+                      "tags": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "tag": {
+                              "type": "string"
+                            },
+                            "count": {
+                              "type": "integer"
+                            }
+                          }
+                        },
+                        "description": "Common tags with their counts"
+                      },
+                      "blogs": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "_id": {
+                              "type": "string"
+                            },
+                            "title": {
+                              "type": "string"
+                            },
+                            "slug": {
+                              "type": "string"
+                            },
+                            "author": {
+                              "type": "object",
+                              "properties": {
+                                "_id": {
+                                  "type": "string"
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "email": {
+                                  "type": "string"
+                                },
+                                "picture": {
+                                  "type": "string",
+                                  "nullable": true
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "courses": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/components/schemas/Course"
+                        }
+                      },
+                      "pagination": {
+                        "type": "object",
+                        "properties": {
+                          "total": {
+                            "type": "integer",
+                            "description": "Total number of blogs"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request (e.g., category not found)",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/blogs/category/single/{slug}": {
+        "get": {
+          "tags": [
+            "Blog"
+          ],
+          "summary": "Get a single blog category",
+          "description": "Retrieves a specific blog category by slug",
+          "operationId": "getSingleBlogCategory",
+          "parameters": [
+            {
+              "name": "slug",
+              "in": "path",
+              "description": "Category slug",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful response with category details",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string",
+                        "description": "Success message"
+                      },
+                      "category": {
+                        "$ref": "#/components/schemas/BlogCategory"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request (e.g., category not found)",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/blogs/category/bulk-feature": {
+        "patch": {
+          "tags": [
+            "Blog"
+          ],
+          "summary": "Bulk update featured status of categories",
+          "description": "Updates the featured status of multiple categories (admin only)",
+          "operationId": "bulkFeatureCategory",
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "categoryIds": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "List of category IDs to update"
+                    },
+                    "featured": {
+                      "type": "boolean",
+                      "description": "New featured status"
+                    }
+                  },
+                  "required": [
+                    "categoryIds",
+                    "featured"
+                  ]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Categories updated successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string",
+                        "description": "Success message"
+                      },
+                      "categories": {
+                        "type": "object",
+                        "description": "Update result"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/reviews/course/{courseId}": {
+        "get": {
+          "tags": [
+            "Reviews"
+          ],
+          "summary": "Get reviews for a specific course",
+          "description": "Retrieves paginated reviews for a course by ID or slug, including average rating and rating breakdown",
+          "operationId": "getCourseReviews",
+          "parameters": [
+            {
+              "name": "courseId",
+              "in": "path",
+              "description": "Course ID or slug",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "page",
+              "in": "query",
+              "description": "Page number for pagination",
+              "required": false,
+              "schema": {
+                "type": "integer",
+                "default": 1
+              }
+            },
+            {
+              "name": "limit",
+              "in": "query",
+              "description": "Number of reviews per page",
+              "required": false,
+              "schema": {
+                "type": "integer",
+                "default": 20
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful response with course reviews",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "reviews": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/components/schemas/Review"
+                        }
+                      },
+                      "averageRating": {
+                        "type": "number",
+                        "description": "Average rating rounded to one decimal place"
+                      },
+                      "totalReviews": {
+                        "type": "integer",
+                        "description": "Total number of reviews"
+                      },
+                      "ratingCounts": {
+                        "type": "object",
+                        "properties": {
+                          "1": {
+                            "type": "integer",
+                            "description": "Number of 1-star ratings"
+                          },
+                          "2": {
+                            "type": "integer",
+                            "description": "Number of 2-star ratings"
+                          },
+                          "3": {
+                            "type": "integer",
+                            "description": "Number of 3-star ratings"
+                          },
+                          "4": {
+                            "type": "integer",
+                            "description": "Number of 4-star ratings"
+                          },
+                          "5": {
+                            "type": "integer",
+                            "description": "Number of 5-star ratings"
+                          }
+                        }
+                      },
+                      "pagination": {
+                        "type": "object",
+                        "properties": {
+                          "current": {
+                            "type": "integer",
+                            "description": "Current page number"
+                          },
+                          "pages": {
+                            "type": "integer",
+                            "description": "Total number of pages"
+                          },
+                          "total": {
+                            "type": "integer",
+                            "description": "Total number of reviews"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request (e.g., missing course ID)",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Course not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "post": {
+          "tags": [
+            "Reviews"
+          ],
+          "summary": "Submit a review for a course",
+          "description": "Submits a new review for a course by ID or slug (authenticated users only)",
+          "operationId": "submitCourseReview",
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "parameters": [
+            {
+              "name": "courseId",
+              "in": "path",
+              "description": "Course ID or slug",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "rating": {
+                      "type": "integer",
+                      "description": "Rating for the course (1 to 5)",
+                      "minimum": 1,
+                      "maximum": 5
+                    },
+                    "comment": {
+                      "type": "string",
+                      "description": "Review comment",
+                      "minLength": 10,
+                      "maxLength": 1000
+                    }
+                  },
+                  "required": [
+                    "rating",
+                    "comment"
+                  ]
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Review submitted successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "review": {
+                        "$ref": "#/components/schemas/Review"
+                      },
+                      "message": {
+                        "type": "string",
+                        "description": "Success message"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request (e.g., missing fields, invalid rating, comment too short/long)",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Course not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            },
+            "409": {
+              "description": "User has already reviewed this course",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/reviews/course/slug/{slug}": {
+        "get": {
+          "tags": [
+            "Reviews"
+          ],
+          "summary": "Get reviews for a course by slug",
+          "description": "Retrieves paginated reviews for a course by slug, including average rating and rating breakdown",
+          "operationId": "getCourseReviewsBySlug",
+          "parameters": [
+            {
+              "name": "slug",
+              "in": "path",
+              "description": "Course slug",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "page",
+              "in": "query",
+              "description": "Page number for pagination",
+              "required": false,
+              "schema": {
+                "type": "integer",
+                "default": 1
+              }
+            },
+            {
+              "name": "limit",
+              "in": "query",
+              "description": "Number of reviews per page",
+              "required": false,
+              "schema": {
+                "type": "integer",
+                "default": 20
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful response with course reviews",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "reviews": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/components/schemas/Review"
+                        }
+                      },
+                      "averageRating": {
+                        "type": "number",
+                        "description": "Average rating rounded to one decimal place"
+                      },
+                      "totalReviews": {
+                        "type": "integer",
+                        "description": "Total number of reviews"
+                      },
+                      "ratingCounts": {
+                        "type": "object",
+                        "properties": {
+                          "1": {
+                            "type": "integer",
+                            "description": "Number of 1-star ratings"
+                          },
+                          "2": {
+                            "type": "integer",
+                            "description": "Number of 2-star ratings"
+                          },
+                          "3": {
+                            "type": "integer",
+                            "description": "Number of 3-star ratings"
+                          },
+                          "4": {
+                            "type": "integer",
+                            "description": "Number of 4-star ratings"
+                          },
+                          "5": {
+                            "type": "integer",
+                            "description": "Number of 5-star ratings"
+                          }
+                        }
+                      },
+                      "pagination": {
+                        "type": "object",
+                        "properties": {
+                          "current": {
+                            "type": "integer",
+                            "description": "Current page number"
+                          },
+                          "pages": {
+                            "type": "integer",
+                            "description": "Total number of pages"
+                          },
+                          "total": {
+                            "type": "integer",
+                            "description": "Total number of reviews"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request (e.g., missing slug)",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Course not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "post": {
+          "tags": [
+            "Reviews"
+          ],
+          "summary": "Submit a review for a course by slug",
+          "description": "Submits a new review for a course by slug (authenticated users only)",
+          "operationId": "submitCourseReviewBySlug",
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "parameters": [
+            {
+              "name": "slug",
+              "in": "path",
+              "description": "Course slug",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "rating": {
+                      "type": "integer",
+                      "description": "Rating for the course (1 to 5)",
+                      "minimum": 1,
+                      "maximum": 5
+                    },
+                    "comment": {
+                      "type": "string",
+                      "description": "Review comment",
+                      "minLength": 10,
+                      "maxLength": 1000
+                    }
+                  },
+                  "required": [
+                    "rating",
+                    "comment"
+                  ]
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Review submitted successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "review": {
+                        "$ref": "#/components/schemas/Review"
+                      },
+                      "message": {
+                        "type": "string",
+                        "description": "Success message"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request (e.g., missing fields, invalid rating, comment too short/long)",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Course not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            },
+            "409": {
+              "description": "User has already reviewed this course",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/reviews/course/{id}": {
+        "patch": {
+          "tags": [
+            "Reviews"
+          ],
+          "summary": "Update a review",
+          "description": "Updates a specific review by ID (authenticated users only)",
+          "operationId": "updateReview",
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "Review ID",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "rating": {
+                      "type": "integer",
+                      "description": "Updated rating for the course (1 to 5)",
+                      "minimum": 1,
+                      "maximum": 5
+                    },
+                    "comment": {
+                      "type": "string",
+                      "description": "Updated review comment",
+                      "minLength": 10,
+                      "maxLength": 1000
+                    }
+                  },
+                  "required": [
+                    "rating",
+                    "comment"
+                  ]
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Review updated successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "review": {
+                        "$ref": "#/components/schemas/Review"
+                      },
+                      "message": {
+                        "type": "string",
+                        "description": "Success message"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request (e.g., missing fields, invalid rating, comment too short/long)",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            },
+            "409": {
+              "description": "Duplicate review error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/reviews/{reviewId}": {
+        "delete": {
+          "tags": [
+            "Reviews"
+          ],
+          "summary": "Delete a review",
+          "description": "Deletes a specific review by ID (authenticated users only)",
+          "operationId": "deleteReview",
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "parameters": [
+            {
+              "name": "reviewId",
+              "in": "path",
+              "description": "Review ID",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Review deleted successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string",
+                        "description": "Success message"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Review not found or unauthorized",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/users": {
+        "get": {
+          "tags": [
+            "Users"
+          ],
+          "summary": "Get all users",
+          "description": "Retrieves a paginated list of users with filtering and sorting (admin only)",
+          "operationId": "getUsers",
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "parameters": [
+            {
+              "name": "page",
+              "in": "query",
+              "description": "Page number for pagination",
+              "required": false,
+              "schema": {
+                "type": "integer",
+                "default": 1
+              }
+            },
+            {
+              "name": "limit",
+              "in": "query",
+              "description": "Number of users per page",
+              "required": false,
+              "schema": {
+                "type": "integer",
+                "default": 10
+              }
+            },
+            {
+              "name": "search",
+              "in": "query",
+              "description": "Search term for user name or email",
+              "required": false,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "role",
+              "in": "query",
+              "description": "Filter by user role",
+              "required": false,
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "all",
+                  "admin",
+                  "user"
+                ],
+                "default": "all"
+              }
+            },
+            {
+              "name": "status",
+              "in": "query",
+              "description": "Filter by user status",
+              "required": false,
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "all",
+                  "active",
+                  "inactive"
+                ],
+                "default": "all"
+              }
+            },
+            {
+              "name": "dateRange",
+              "in": "query",
+              "description": "Filter by user creation date range",
+              "required": false,
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "all",
+                  "today",
+                  "week",
+                  "month",
+                  "quarter",
+                  "year"
+                ],
+                "default": "all"
+              }
+            },
+            {
+              "name": "sortBy",
+              "in": "query",
+              "description": "Field to sort by",
+              "required": false,
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "name",
+                  "email",
+                  "role",
+                  "status",
+                  "createdAt"
+                ],
+                "default": "createdAt"
+              }
+            },
+            {
+              "name": "sortOrder",
+              "in": "query",
+              "description": "Sort order",
+              "required": false,
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "asc",
+                  "desc"
+                ],
+                "default": "desc"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful response with list of users",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "users": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/components/schemas/User"
+                        }
+                      },
+                      "pagination": {
+                        "type": "object",
+                        "properties": {
+                          "current": {
+                            "type": "integer",
+                            "description": "Current page number"
+                          },
+                          "pages": {
+                            "type": "integer",
+                            "description": "Total number of pages"
+                          },
+                          "total": {
+                            "type": "integer",
+                            "description": "Total number of users"
+                          },
+                          "limit": {
+                            "type": "integer",
+                            "description": "Number of users per page"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/users/schedule-deletion": {
+        "post": {
+          "tags": [
+            "Users"
+          ],
+          "summary": "Schedule account deletion",
+          "description": "Marks a user account for deletion with a 7-day grace period (authenticated users only)",
+          "operationId": "scheduleDeletion",
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "reason": {
+                      "type": "string",
+                      "description": "Reason for account deletion"
+                    }
+                  },
+                  "required": [
+                    "reason"
+                  ]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Account marked for deletion",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string",
+                        "description": "Success message"
+                      },
+                      "deletionDate": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "Scheduled deletion date"
+                      },
+                      "gracePeriodDays": {
+                        "type": "integer",
+                        "description": "Number of days in the grace period"
+                      },
+                      "reason": {
+                        "type": "string",
+                        "description": "Deletion reason"
+                      },
+                      "note": {
+                        "type": "string",
+                        "description": "Information about the deletion process"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request (e.g., missing reason, account already marked)",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "User not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/users/restore-account": {
+        "post": {
+          "tags": [
+            "Users"
+          ],
+          "summary": "Restore account",
+          "description": "Restores a user account within the 7-day grace period (authenticated users only)",
+          "operationId": "restoreAccount",
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Account restored successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string",
+                        "description": "Success message"
+                      },
+                      "note": {
+                        "type": "string",
+                        "description": "Information about the restoration"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request (e.g., account not marked for deletion, grace period expired)",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "User not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/users/deletion-status": {
+        "get": {
+          "tags": [
+            "Users"
+          ],
+          "summary": "Get account deletion status",
+          "description": "Retrieves the deletion status for the current user's account (authenticated users only)",
+          "operationId": "getDeletionStatus",
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful response with deletion status",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "isDeleted": {
+                        "type": "boolean",
+                        "description": "Indicates if the account is marked for deletion"
+                      },
+                      "deletedAt": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "Timestamp when the account was marked for deletion",
+                        "nullable": true
+                      },
+                      "deletionScheduledAt": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "Timestamp when the account is scheduled for permanent deletion",
+                        "nullable": true
+                      },
+                      "deletionReason": {
+                        "type": "string",
+                        "description": "Reason for account deletion",
+                        "nullable": true
+                      },
+                      "daysLeft": {
+                        "type": "integer",
+                        "description": "Number of days left in the grace period",
+                        "nullable": true
+                      },
+                      "canRestore": {
+                        "type": "boolean",
+                        "description": "Indicates if the account can still be restored",
+                        "nullable": true
+                      },
+                      "message": {
+                        "type": "string",
+                        "description": "Status message"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "User not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/users/{id}": {
+        "get": {
+          "tags": [
+            "Users"
+          ],
+          "summary": "Get a single user",
+          "description": "Retrieves a specific user by ID (authenticated users can access their own data, admins can access any user)",
+          "operationId": "getUserById",
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "User ID",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful response with user details",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "user": {
+                        "$ref": "#/components/schemas/User"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "403": {
+              "description": "Access denied (non-admin accessing another user's data)",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "User not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "put": {
+          "tags": [
+            "Users"
+          ],
+          "summary": "Update a user",
+          "description": "Updates a specific user by ID (admin only, cannot update own role/status)",
+          "operationId": "updateUser",
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "User ID",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "email": {
+                      "type": "string",
+                      "description": "Updated email address"
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "Updated user name"
+                    },
+                    "picture": {
+                      "type": "string",
+                      "description": "Updated profile picture URL",
+                      "nullable": true
+                    },
+                    "role": {
+                      "type": "string",
+                      "enum": [
+                        "admin",
+                        "user"
+                      ],
+                      "description": "Updated user role"
+                    },
+                    "isActive": {
+                      "type": "boolean",
+                      "description": "Updated active status"
+                    },
+                    "stripeCustomerId": {
+                      "type": "string",
+                      "description": "Updated Stripe customer ID",
+                      "nullable": true
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "User updated successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string",
+                        "description": "Success message"
+                      },
+                      "user": {
+                        "$ref": "#/components/schemas/User"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "401": {
+              "description": "Unauthorized (attempting to update own role/status)",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "User not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "delete": {
+          "tags": [
+            "Users"
+          ],
+          "summary": "Delete a user",
+          "description": "Deletes a specific user by ID (admin only, cannot delete own account)",
+          "operationId": "deleteUser",
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "User ID",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "User deleted successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string",
+                        "description": "Success message"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request (e.g., attempting to delete own account)",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "User not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/admin/courses": {
+        "get": {
+          "tags": [
+            "Admin Courses"
+          ],
+          "summary": "Get all courses for admin",
+          "description": "Retrieves a paginated list of courses for admin use, including title, thumbnail, publication status, category, and instructors",
+          "operationId": "getAdminCourses",
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "parameters": [
+            {
+              "name": "page",
+              "in": "query",
+              "description": "Page number for pagination",
+              "required": false,
+              "schema": {
+                "type": "integer",
+                "default": 1
+              }
+            },
+            {
+              "name": "limit",
+              "in": "query",
+              "description": "Number of courses per page",
+              "required": false,
+              "schema": {
+                "type": "integer",
+                "default": 50
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful response with list of courses",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "courses": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/components/schemas/Course"
+                        }
+                      },
+                      "pagination": {
+                        "type": "object",
+                        "properties": {
+                          "current": {
+                            "type": "integer",
+                            "description": "Current page number"
+                          },
+                          "pages": {
+                            "type": "integer",
+                            "description": "Total number of pages"
+                          },
+                          "total": {
+                            "type": "integer",
+                            "description": "Total number of courses"
+                          },
+                          "limit": {
+                            "type": "integer",
+                            "description": "Number of courses per page"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/admin/courses/bulk-update": {
+        "post": {
+          "tags": [
+            "Admin Courses"
+          ],
+          "summary": "Bulk update courses",
+          "description": "Updates the subscription plan for multiple courses (admin only)",
+          "operationId": "bulkUpdateCourses",
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "courseIds": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "List of course IDs to update"
+                    },
+                    "updates": {
+                      "type": "object",
+                      "properties": {
+                        "subscriptionPlan": {
+                          "type": "string",
+                          "description": "ID of the subscription plan to assign (or empty string/null to remove)",
+                          "nullable": true
+                        }
+                      },
+                      "required": [
+                        "subscriptionPlan"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "courseIds",
+                    "updates"
+                  ]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Courses updated successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "success": {
+                        "type": "boolean",
+                        "description": "Indicates if the operation was successful"
+                      },
+                      "updatedCount": {
+                        "type": "integer",
+                        "description": "Number of courses modified"
+                      },
+                      "matchedCount": {
+                        "type": "integer",
+                        "description": "Number of courses matched"
+                      },
+                      "updatedCourses": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/components/schemas/Course"
+                        }
+                      },
+                      "message": {
+                        "type": "string",
+                        "description": "Success message"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request (e.g., missing course IDs, invalid subscription plan)",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/admin/courses/bulk-publish": {
+        "post": {
+          "tags": [
+            "Admin Courses"
+          ],
+          "summary": "Bulk publish/unpublish courses",
+          "description": "Publishes or unpublishes multiple courses (admin only)",
+          "operationId": "bulkPublishCourses",
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "courseIds": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "List of course IDs to update"
+                    },
+                    "isPublished": {
+                      "type": "boolean",
+                      "description": "Publication status to set"
+                    }
+                  },
+                  "required": [
+                    "courseIds",
+                    "isPublished"
+                  ]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Courses published/unpublished successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "success": {
+                        "type": "boolean",
+                        "description": "Indicates if the operation was successful"
+                      },
+                      "updatedCount": {
+                        "type": "integer",
+                        "description": "Number of courses modified"
+                      },
+                      "matchedCount": {
+                        "type": "integer",
+                        "description": "Number of courses matched"
+                      },
+                      "updatedCourses": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/components/schemas/Course"
+                        }
+                      },
+                      "message": {
+                        "type": "string",
+                        "description": "Success message"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request (e.g., missing course IDs, invalid isPublished value)",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/admin/courses/subscription-stats": {
+        "get": {
+          "tags": [
+            "Admin Courses"
+          ],
+          "summary": "Get subscription plan statistics",
+          "description": "Retrieves statistics about courses and their subscription plans (admin only)",
+          "operationId": "getSubscriptionStats",
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful response with subscription plan statistics",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "totalCourses": {
+                        "type": "integer",
+                        "description": "Total number of courses"
+                      },
+                      "coursesWithPlans": {
+                        "type": "integer",
+                        "description": "Number of courses with subscription plans"
+                      },
+                      "freeCourses": {
+                        "type": "integer",
+                        "description": "Number of courses without subscription plans"
+                      },
+                      "planDistribution": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "planName": {
+                              "type": "string",
+                              "description": "Name of the subscription plan"
+                            },
+                            "planLevel": {
+                              "type": "string",
+                              "description": "Level of the subscription plan"
+                            },
+                            "courseCount": {
+                              "type": "integer",
+                              "description": "Number of courses under the plan"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/auth/google": {
+        "post": {
+          "tags": [
+            "Authentication"
+          ],
+          "summary": "Authenticate with Google",
+          "description": "Authenticates a user using a Google token, creates a new user if not exists, and returns a JWT token",
+          "operationId": "googleAuth",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "token": {
+                      "type": "string",
+                      "description": "Google authentication token"
+                    }
+                  },
+                  "required": [
+                    "token"
+                  ]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Authentication successful",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string",
+                        "description": "Success message"
+                      },
+                      "token": {
+                        "type": "string",
+                        "description": "JWT token for authenticated session"
+                      },
+                      "user": {
+                        "$ref": "#/components/schemas/User"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request (e.g., missing or invalid Google token)",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            },
+            "403": {
+              "description": "Forbidden (e.g., grace period expired)",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/auth/apple": {
+        "post": {
+          "tags": [
+            "Authentication"
+          ],
+          "summary": "Authenticate with Apple",
+          "description": "Authenticates a user using an Apple identity token, creates a new user if not exists, and returns a JWT token",
+          "operationId": "appleAuth",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "identityToken": {
+                      "type": "string",
+                      "description": "Apple identity token"
+                    },
+                    "fullName": {
+                      "type": "object",
+                      "properties": {
+                        "givenName": {
+                          "type": "string",
+                          "description": "User's given name",
+                          "nullable": true
+                        },
+                        "familyName": {
+                          "type": "string",
+                          "description": "User's family name",
+                          "nullable": true
+                        }
+                      },
+                      "description": "User's full name from Apple",
+                      "nullable": true
+                    },
+                    "email": {
+                      "type": "string",
+                      "description": "User's email address (optional, if not provided in token)",
+                      "nullable": true
+                    }
+                  },
+                  "required": [
+                    "identityToken"
+                  ]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Authentication successful",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string",
+                        "description": "Success message"
+                      },
+                      "token": {
+                        "type": "string",
+                        "description": "JWT token for authenticated session"
+                      },
+                      "user": {
+                        "$ref": "#/components/schemas/User"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "403": {
+              "description": "Forbidden (e.g., grace period expired)",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Bad request (e.g., invalid token, unverified account, existing email)",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/auth/me": {
+        "get": {
+          "tags": [
+            "Authentication"
+          ],
+          "summary": "Get current user profile",
+          "description": "Retrieves the profile and deletion status of the authenticated user",
+          "operationId": "getCurrentUser",
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful response with user profile and deletion status",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "user": {
+                        "$ref": "#/components/schemas/User"
+                      },
+                      "deletionStatus": {
+                        "$ref": "#/components/schemas/DeletionStatus"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "403": {
+              "description": "Forbidden (e.g., grace period expired)",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "User not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/auth/logout": {
+        "post": {
+          "tags": [
+            "Authentication"
+          ],
+          "summary": "Log out",
+          "description": "Logs out the authenticated user (client-side token invalidation)",
+          "operationId": "logout",
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Logout successful",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string",
+                        "description": "Success message"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/auth/validate-recaptcha": {
+        "post": {
+          "tags": [
+            "Authentication"
+          ],
+          "summary": "Validate reCAPTCHA",
+          "description": "Validates a reCAPTCHA token with Google's reCAPTCHA API",
+          "operationId": "validateRecaptcha",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "token": {
+                      "type": "string",
+                      "description": "reCAPTCHA token"
+                    }
+                  },
+                  "required": [
+                    "token"
+                  ]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "reCAPTCHA verified successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "success": {
+                        "type": "boolean",
+                        "description": "Indicates if verification was successful"
+                      },
+                      "message": {
+                        "type": "string",
+                        "description": "Success message"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Failed to verify reCAPTCHA",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/enrollments/check/{courseId}": {
+        "get": {
+          "tags": [
+            "Enrollments"
+          ],
+          "summary": "Check enrollment status",
+          "description": "Checks if the authenticated user is enrolled in a specific course",
+          "operationId": "checkEnrollment",
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "parameters": [
+            {
+              "name": "courseId",
+              "in": "path",
+              "description": "Course ID",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Enrollment status retrieved",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "isEnrolled": {
+                        "type": "boolean",
+                        "description": "Indicates if the user is enrolled"
+                      },
+                      "enrollment": {
+                        "$ref": "#/components/schemas/Enrollment",
+                        "description": "Enrollment details if enrolled, null otherwise",
+                        "nullable": true
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/enrollments/": {
+        "get": {
+          "tags": [
+            "Enrollments"
+          ],
+          "summary": "Get user's enrollments",
+          "description": "Retrieves a paginated list of the authenticated user's enrollments with progress details",
+          "operationId": "getUserEnrollments",
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "parameters": [
+            {
+              "name": "page",
+              "in": "query",
+              "description": "Page number for pagination",
+              "required": false,
+              "schema": {
+                "type": "integer",
+                "default": 1
+              }
+            },
+            {
+              "name": "limit",
+              "in": "query",
+              "description": "Number of enrollments per page",
+              "required": false,
+              "schema": {
+                "type": "integer",
+                "default": 10
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful response with user's enrollments",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "enrollments": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/components/schemas/EnrollmentWithProgress"
+                        }
+                      },
+                      "pagination": {
+                        "type": "object",
+                        "properties": {
+                          "current": {
+                            "type": "integer",
+                            "description": "Current page number"
+                          },
+                          "pages": {
+                            "type": "integer",
+                            "description": "Total number of pages"
+                          },
+                          "total": {
+                            "type": "integer",
+                            "description": "Total number of enrollments"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/enrollments/all": {
+        "get": {
+          "tags": [
+            "Enrollments"
+          ],
+          "summary": "Get all user enrollments (basic)",
+          "description": "Retrieves a basic list of the authenticated user's enrollments with course IDs",
+          "operationId": "getAllUserEnrollments",
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful response with user's enrollments",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "enrollments": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "_id": {
+                              "type": "string",
+                              "description": "Enrollment ID"
+                            },
+                            "course": {
+                              "type": "string",
+                              "description": "Course ID"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Failed to get enrollments",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/enrollments/admin": {
+        "get": {
+          "tags": [
+            "Enrollments"
+          ],
+          "summary": "Get all enrollments (admin only)",
+          "description": "Retrieves a paginated list of all enrollments with user and course details (admin only)",
+          "operationId": "getAdminEnrollments",
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "parameters": [
+            {
+              "name": "page",
+              "in": "query",
+              "description": "Page number for pagination",
+              "required": false,
+              "schema": {
+                "type": "integer",
+                "default": 1
+              }
+            },
+            {
+              "name": "limit",
+              "in": "query",
+              "description": "Number of enrollments per page",
+              "required": false,
+              "schema": {
+                "type": "integer",
+                "default": 10
+              }
+            },
+            {
+              "name": "search",
+              "in": "query",
+              "description": "Search term for user name or email",
+              "required": false,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "enrolledAt",
+              "in": "query",
+              "description": "Filter by enrollment date (YYYY-MM-DD)",
+              "required": false,
+              "schema": {
+                "type": "string",
+                "format": "date"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful response with all enrollments",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "enrollments": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/components/schemas/Enrollment"
+                        }
+                      },
+                      "pagination": {
+                        "type": "object",
+                        "properties": {
+                          "current": {
+                            "type": "integer",
+                            "description": "Current page number"
+                          },
+                          "pages": {
+                            "type": "integer",
+                            "description": "Total number of pages"
+                          },
+                          "total": {
+                            "type": "integer",
+                            "description": "Total number of enrollments"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/enrollments/bulk": {
+        "post": {
+          "tags": [
+            "Enrollments"
+          ],
+          "summary": "Bulk enroll in courses",
+          "description": "Enrolls the authenticated user in multiple courses, skipping existing enrollments",
+          "operationId": "bulkEnroll",
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "courseIds": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "List of course IDs to enroll in"
+                    },
+                    "orderData": {
+                      "type": "object",
+                      "description": "Optional order data associated with the enrollment",
+                      "nullable": true
+                    }
+                  },
+                  "required": [
+                    "courseIds"
+                  ]
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Successfully enrolled in courses",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string",
+                        "description": "Success message"
+                      },
+                      "enrollments": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/components/schemas/Enrollment"
+                        }
+                      },
+                      "skipped": {
+                        "type": "integer",
+                        "description": "Number of courses skipped due to existing enrollments"
+                      },
+                      "orderData": {
+                        "type": "object",
+                        "description": "Provided order data",
+                        "nullable": true
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request (e.g., missing course IDs, already enrolled)",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "One or more courses not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/enrollments/{courseId}": {
+        "post": {
+          "tags": [
+            "Enrollments"
+          ],
+          "summary": "Enroll in a course",
+          "description": "Enrolls the authenticated user in a specific course",
+          "operationId": "enrollCourse",
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "parameters": [
+            {
+              "name": "courseId",
+              "in": "path",
+              "description": "Course ID",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "Successfully enrolled in the course",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string",
+                        "description": "Success message"
+                      },
+                      "enrollment": {
+                        "$ref": "#/components/schemas/Enrollment"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request (e.g., already enrolled)",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Course not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/enrollments/{id}": {
+        "get": {
+          "tags": [
+            "Enrollments"
+          ],
+          "summary": "Get a single enrollment",
+          "description": "Retrieves a specific enrollment by ID (accessible to the enrolled user or admin)",
+          "operationId": "getEnrollmentById",
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "Enrollment ID",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful response with enrollment details",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "enrollment": {
+                        "$ref": "#/components/schemas/Enrollment"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "403": {
+              "description": "Access denied (non-admin accessing another user's enrollment)",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Enrollment not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "delete": {
+          "tags": [
+            "Enrollments"
+          ],
+          "summary": "Cancel an enrollment",
+          "description": "Cancels a specific enrollment by ID (admin only)",
+          "operationId": "cancelEnrollment",
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "Enrollment ID",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Enrollment cancelled successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string",
+                        "description": "Success message"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Enrollment not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "customOptions": {}
+}
