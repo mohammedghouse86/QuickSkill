@@ -1,5 +1,4 @@
 {
-  "swaggerDoc": {
     "openapi": "3.0.3",
     "info": {
       "title": "REST API for Quickskill",
@@ -5644,7 +5643,6 @@
           }
         }
       }
-    }
-  },
+    },
   "customOptions": {}
 }
