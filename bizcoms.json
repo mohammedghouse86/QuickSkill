@@ -1,1 +1,2870 @@
-b
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "api.Bizcoms Copy",
+    "version": "2.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.bizcoms.ai/api/v2"
+    }
+  ],
+  "paths": {
+    "/organization/myorganization": {
+      "get": {
+        "operationId": "_organization_myorganization",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+             
+        ],
+        "summary": "/organization/myorganization"
+      }
+    },
+    "/organization/allmember/{memberId}": {
+      "get": {
+        "operationId": "_organization_allmember_memberId_",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+            
+          {
+            "name": "memberId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68ecb77e206a9cafd61e48ad"
+          }
+        ],
+        "summary": "/organization/allmember/{memberId}"
+      }
+    },
+    "/user/get-user/{userId}": {
+      "get": {
+        "operationId": "_user_get_user_userId_",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+            
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68ec783b206a9cafd61e41e6"
+          }
+        ],
+        "summary": "/user/get-user/{userId}"
+      }
+    },
+    "/organization/create": {
+      "post": {
+        "operationId": "_organization_create",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+             
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "example": {
+                "name": "Perf Org1",
+                "description": "",
+                "invitation": [
+                  {
+                    "email": "workhubconnect77@gmail.com",
+                    "accessLevel": "administrator"
+                  }
+                ],
+                "logo": "",
+                "private": false,
+                "companySize": "",
+                "industry": ""
+              }
+            }
+          }
+        },
+        "summary": "/organization/create"
+      }
+    },
+    "/organization/{orgId}/favorite": {
+      "patch": {
+        "operationId": "_organization_orgId_favorite",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+            
+          {
+            "name": "orgId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68ecb73c206a9cafd61e484d"
+          }
+        ],
+        "summary": "/organization/{orgId}/favorite"
+      }
+    },
+    "/history/get": {
+      "post": {
+        "operationId": "_api_v2_history_get",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+             
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "example": {
+                "itemId": "68ecb73c206a9cafd61e484d",
+                "modelName": "Organization_v2"
+              }
+            }
+          }
+        },
+        "summary": "/api/v2/history/get"
+      }
+    },
+    "/project/create": {
+      "post": {
+        "operationId": "_project_create",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+             
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "example": {
+                "name": "Waterfall P1",
+                "description": "Traditional project management with sequential phases",
+                "template": {
+                  "_id": 4,
+                  "name": "Waterfall",
+                  "subTitle": "Traditional project management with sequential phases",
+                  "image": {
+                    "type": "svg",
+                    "key": null,
+                    "ref": null,
+                    "props": {
+                      "width": "20",
+                      "height": "20",
+                      "viewBox": "0 0 29 29",
+                      "fill": "none",
+                      "xmlns": "http://www.w3.org/2000/svg",
+                      "children": [
+                        {
+                          "type": "path",
+                          "key": null,
+                          "ref": null,
+                          "props": {
+                            "d": "M26.1957 8.37158L16.1096 18.4576L10.1766 12.5247L2.46378 20.2375",
+                            "stroke": "white",
+                            "stroke-width": "2.37319",
+                            "stroke-linecap": "round",
+                            "stroke-linejoin": "round"
+                          },
+                          "_owner": null
+                        },
+                        {
+                          "type": "path",
+                          "key": null,
+                          "ref": null,
+                          "props": {
+                            "d": "M19.0761 8.37158H26.1956V15.4911",
+                            "stroke": "white",
+                            "stroke-width": "2.37319",
+                            "stroke-linecap": "round",
+                            "stroke-linejoin": "round"
+                          },
+                          "_owner": null
+                        }
+                      ]
+                    },
+                    "_owner": null
+                  },
+                  "description": "Set up two new teams to work autonomously with separate scrum boards in one company-managed project. Create and assign issues to each team in the plan, and save them to the project for a single source of truth. Monitor overall workload using your plan for a complete view of cross-team work.",
+                  "category": "Software development",
+                  "issueTypes": [
+                    {
+                      "name": "Epic",
+                      "subTitle": "Large work items spanning multiple sprints",
+                      "icon": "/items/epic.png",
+                      "childrens": [
+                        "User Story"
+                      ]
+                    },
+                    {
+                      "name": "User Story",
+                      "subTitle": "User-focused requirements",
+                      "icon": "/items/userStory.png",
+                      "childrens": [
+                        "Sub-task"
+                      ]
+                    },
+                    {
+                      "name": "Sub-task",
+                      "subTitle": "Part of a task",
+                      "icon": "/items/task.png"
+                    }
+                  ],
+                  "workflows": [
+                    {
+                      "label": "To Do",
+                      "value": "Ready for work",
+                      "icon": {
+                        "key": null,
+                        "ref": null,
+                        "props": {
+                          "size": 24
+                        },
+                        "_owner": null
+                      }
+                    },
+                    {
+                      "label": "In Progress",
+                      "value": "Currently being worked on",
+                      "icon": {
+                        "key": null,
+                        "ref": null,
+                        "props": {
+                          "size": 24
+                        },
+                        "_owner": null
+                      }
+                    },
+                    {
+                      "label": "Done",
+                      "value": "Completed work",
+                      "icon": {
+                        "key": null,
+                        "ref": null,
+                        "props": {
+                          "size": 24
+                        },
+                        "_owner": null
+                      }
+                    }
+                  ],
+                  "type": "project"
+                },
+                "type": "project",
+                "orgSlug": "perf-org1"
+              }
+            }
+          }
+        },
+        "summary": "/project/create"
+      }
+    },
+    "/project/initialdataBySlug/{projectSlug}": {
+      "get": {
+        "operationId": "_initialdataBySlug_projectSlug_",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+            
+          {
+            "name": "projectSlug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "waterfall-p1-w5jLfAe6r"
+          }
+        ],
+        "summary": "/initialdataBySlug/{projectSlug}"
+      }
+    },
+    "/project/myprojects/{organizationSlug}": {
+      "get": {
+        "operationId": "_project_myprojects_organizationSlug_",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+            
+          {
+            "name": "organizationSlug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "perf-org1"
+          }
+        ],
+        "summary": "/project/myprojects/{organizationSlug}"
+      }
+    },
+    "/project/groups/{projectId}/all": {
+      "get": {
+        "operationId": "_project_groups_projectId_all",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+            
+          {
+            "name": "projectId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68edd87e206a9cafd61e5c7b"
+          },
+          {
+            "name": "project",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68edd87e206a9cafd61e5c7b"
+          },
+          {
+            "name": "team",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68edd87e206a9cafd61e5c80"
+          }
+        ],
+        "summary": "/project/groups/{projectId}/all"
+      }
+    },
+    "/notification/mynotifications": {
+      "get": {
+        "operationId": "_notification_mynotifications",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+             
+        ],
+        "summary": "/notification/mynotifications"
+      }
+    },
+    "/wiki/getAll/{projectId}": {
+      "get": {
+        "operationId": "_wiki_getAll_projectId_",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+            
+          {
+            "name": "projectId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68edd87e206a9cafd61e5c7b"
+          }
+        ],
+        "summary": "/wiki/getAll/{projectId}"
+      }
+    },
+    "/test-plan/test-strategy/get": {
+      "get": {
+        "operationId": "_test_plan_test_strategy_get",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+            
+          {
+            "name": "project",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68edd87e206a9cafd61e5c7b"
+          },
+          {
+            "name": "team",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68edd87e206a9cafd61e5c80"
+          }
+        ],
+        "summary": "/test-plan/test-strategy/get"
+      }
+    },
+    "/test-plan/parameter/get": {
+      "get": {
+        "operationId": "_test_plan_parameter_get",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+            
+          {
+            "name": "project",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68edd87e206a9cafd61e5c7b"
+          }
+        ],
+        "summary": "/test-plan/parameter/get"
+      }
+    },
+    "/test-plan/config-variables/get": {
+      "get": {
+        "operationId": "_test_plan_config_variables_get",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+            
+          {
+            "name": "project",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68edd87e206a9cafd61e5c7b"
+          }
+        ],
+        "summary": "/test-plan/config-variables/get"
+      }
+    },
+    "/calendar/event/myevents-team": {
+      "get": {
+        "operationId": "_calendar_event_myevents_team",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+            
+          {
+            "name": "team",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68edd87e206a9cafd61e5c80"
+          }
+        ],
+        "summary": "/calendar/event/myevents-team"
+      }
+    },
+    "/chat/all-my-chats-team": {
+      "get": {
+        "operationId": "_chat_all_my_chats_team",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+             
+        ],
+        "summary": "/chat/all-my-chats-team"
+      }
+    },
+    "/user/get-theme": {
+      "get": {
+        "operationId": "_user_get_theme",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+             
+        ],
+        "summary": "/user/get-theme"
+      }
+    },
+    "/project/projectbyslug/{projectSlug}": {
+      "get": {
+        "operationId": "_project_projectbyslug_projectSlug_",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+            
+          {
+            "name": "projectSlug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "waterfall-p1-w5jLfAe6r"
+          }
+        ],
+        "summary": "/project/projectbyslug/{projectSlug}"
+      }
+    },
+    "/project/group/68edd87e206a9cafd61e5c80": {
+      "get": {
+        "operationId": "_project_group_68edd87e206a9cafd61e5c80",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+             
+        ],
+        "summary": "/project/group/68edd87e206a9cafd61e5c80"
+      }
+    },
+    "/sprint/mysprints": {
+      "get": {
+        "operationId": "_sprint_mysprints",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+            
+          {
+            "name": "project",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68edd87e206a9cafd61e5c7b"
+          },
+          {
+            "name": "team",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68f1a32f44854828f21fd2e1"
+          }
+        ],
+        "summary": "/sprint/mysprints"
+      }
+    },
+    "/project/item/myitems": {
+      "get": {
+        "operationId": "_project_item_myitems",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+            
+          {
+            "name": "project",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68edd87e206a9cafd61e5c7b"
+          },
+          {
+            "name": "team",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68edd87e206a9cafd61e5c80"
+          }
+        ],
+        "summary": "/project/item/myitems"
+      }
+    },
+    "/retro/get": {
+      "get": {
+        "operationId": "_retro_get",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+            
+          {
+            "name": "project",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68edd87e206a9cafd61e5c7b"
+          },
+          {
+            "name": "team",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68edd87e206a9cafd61e5c80"
+          }
+        ],
+        "summary": "/retro/get"
+      }
+    },
+    "/user/get-pin/work-item": {
+      "get": {
+        "operationId": "_user_get_pin_work_item",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+            
+          {
+            "name": "project",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68edd87e206a9cafd61e5c7b"
+          },
+          {
+            "name": "team",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68edd87e206a9cafd61e5c80"
+          }
+        ],
+        "summary": "/user/get-pin/work-item"
+      }
+    },
+    "/project/totaluser/{projectId}": {
+      "get": {
+        "operationId": "_project_totaluser_projectId_",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+            
+          {
+            "name": "projectId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68edd87e206a9cafd61e5c7b"
+          }
+        ],
+        "summary": "/project/totaluser/{projectId}"
+      }
+    },
+    "/upload": {
+      "post": {
+        "operationId": "_upload",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+            
+          {
+            "name": "project",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68edd87e206a9cafd61e5c7b"
+          },
+          {
+            "name": "team",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68edd87e206a9cafd61e5c80"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "files": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "/upload"
+      }
+    },
+    "/project/update/{projectId}": {
+      "put": {
+        "operationId": "_project_update_projectId_",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+            
+          {
+            "name": "projectId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68edd87e206a9cafd61e5c7b"
+          },
+          {
+            "name": "project",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68f1a32f44854828f21fd2dc"
+          },
+          {
+            "name": "team",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68f1a32f44854828f21fd2e1"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "example": {
+                "name": "Waterfall1",
+                "description": "Traditional project management with sequential phases",
+                "type": "project"
+              }
+            }
+          }
+        },
+        "summary": "/project/update/{projectId}"
+      }
+    },
+    "/project/issuetype/update/{issueId}": {
+      "patch": {
+        "operationId": "_project_issuetype_update_issueId_",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+            
+          {
+            "name": "issueId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68edd87e206a9cafd61e5c94"
+          },
+          {
+            "name": "project",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68f1a32f44854828f21fd2dc"
+          },
+          {
+            "name": "team",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68f1a32f44854828f21fd2e1"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "example": {
+                "tabs": [
+                  {
+                    "fieldData": {
+                      "options": []
+                    },
+                    "uid": "4371be63-97c0-4cc3-ba0d-1cd08fe4544a",
+                    "type": "tab",
+                    "title": "Epic Details",
+                    "index": 0,
+                    "_id": "68edd87e206a9cafd61e5c95"
+                  },
+                  {
+                    "fieldData": {
+                      "options": []
+                    },
+                    "uid": "cf042cd8-9688-433e-b5cf-d98b9ed57e70",
+                    "type": "row",
+                    "title": "Epic Info",
+                    "index": 0,
+                    "parent": "4371be63-97c0-4cc3-ba0d-1cd08fe4544a",
+                    "_id": "68edd87e206a9cafd61e5c96"
+                  },
+                  {
+                    "fieldData": {
+                      "options": []
+                    },
+                    "uid": "97da2b67-bac9-4dfd-9413-f980f51f1cca",
+                    "type": "column",
+                    "title": "Epic Metadata",
+                    "index": 0,
+                    "parent": "cf042cd8-9688-433e-b5cf-d98b9ed57e70",
+                    "width": 100,
+                    "_id": "68edd87e206a9cafd61e5c97"
+                  },
+                  {
+                    "fieldData": {
+                      "fieldType": "short_text",
+                      "isDefault": false,
+                      "isRequired": false,
+                      "description": "Summary of the Epic",
+                      "defaultValue": "",
+                      "options": []
+                    },
+                    "uid": "fe90f8ea-0f83-45a0-9e19-e5ac7d353e2c",
+                    "type": "field",
+                    "title": "Epic Summary",
+                    "index": 0,
+                    "parent": "97da2b67-bac9-4dfd-9413-f980f51f1cca",
+                    "_id": "68edd87e206a9cafd61e5c98"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "summary": "/project/issuetype/update/{issueId}"
+      }
+    },
+    "/project/workflow/get": {
+      "get": {
+        "operationId": "_project_workflow_get",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+            
+          {
+            "name": "project",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68edd87e206a9cafd61e5c7b"
+          }
+        ],
+        "summary": "/project/workflow/get"
+      }
+    },
+    "/project/column/update": {
+      "patch": {
+        "operationId": "_project_column_update",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+            
+          {
+            "name": "project",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68f1a32f44854828f21fd2dc"
+          },
+          {
+            "name": "team",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68f1a32f44854828f21fd2e1"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "example": {
+                "columns": [
+                  {
+                    "name": "To Do",
+                    "statuses": [
+                      "68edd87e206a9cafd61e5cad"
+                    ]
+                  },
+                  {
+                    "name": "In Progress",
+                    "statuses": [
+                      "68edd87e206a9cafd61e5cae"
+                    ]
+                  },
+                  {
+                    "name": "Done",
+                    "statuses": [
+                      "68edd87e206a9cafd61e5caf"
+                    ]
+                  },
+                  {
+                    "name": "Pending",
+                    "statuses": []
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "summary": "/project/column/update"
+      }
+    },
+    "/notification/get-subscription/teamAndGroup/{teamId}": {
+      "get": {
+        "operationId": "_notification_get_subscription_teamAndGroup_teamId_",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+            
+          {
+            "name": "teamId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68edd87e206a9cafd61e5c80"
+          },
+          {
+            "name": "project",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68edd87e206a9cafd61e5c7b"
+          },
+          {
+            "name": "team",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68edd87e206a9cafd61e5c80"
+          }
+        ],
+        "summary": "/notification/get-subscription/teamAndGroup/{teamId}"
+      }
+    },
+    "/chat/all-my-chats": {
+      "post": {
+        "operationId": "_chat_all_my_chats",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+             
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "example": {
+                "id": "68edd87e206a9cafd61e5c80",
+                "source": "teamAndGroup"
+              }
+            }
+          }
+        },
+        "summary": "/chat/all-my-chats"
+      }
+    },
+    "/chat/find-or-create": {
+      "post": {
+        "operationId": "_chat_find_or_create",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+            
+          {
+            "name": "project",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68edd87e206a9cafd61e5c7b"
+          },
+          {
+            "name": "team",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68edd87e206a9cafd61e5c80"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "example": {
+                "source": "teamAndGroup1",
+                "id": "68edd87e206a9cafd61e5c80",
+                "name": "Intro",
+                "description": "Hi"
+              }
+            }
+          }
+        },
+        "summary": "/chat/find-or-create"
+      }
+    },
+    "/chat/my-chats": {
+      "post": {
+        "operationId": "_chat_my_chats",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+            
+          {
+            "name": "project",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68edd87e206a9cafd61e5c7b"
+          },
+          {
+            "name": "team",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68edd87e206a9cafd61e5c80"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "example": {
+                "chatId": "68ee12e3206a9cafd61e638d"
+              }
+            }
+          }
+        },
+        "summary": "/chat/my-chats"
+      }
+    },
+    "/chat/{chatId}/messages": {
+      "post": {
+        "operationId": "_chat_chatId_messages",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+            
+          {
+            "name": "chatId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68ee12e3206a9cafd61e638d"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "example": {
+                "text": "Hi",
+                "files": []
+              }
+            }
+          }
+        },
+        "summary": "/chat/{chatId}/messages"
+      }
+    },
+    "/calendar/event/create": {
+      "post": {
+        "operationId": "_calendar_event_create",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+             
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "example": {
+                "title": "My first Event",
+                "start": "2025-10-14T16:29:29.793Z",
+                "end": "2025-10-14T17:00:29.793Z",
+                "agenda": "Let catchup to discuss the Zero Day issues",
+                "description": "Let catchup to discuss the Zero Day issues",
+                "actionItems": "",
+                "followUp": "",
+                "notifications": [],
+                "meetingLink": "",
+                "attachments": [],
+                "invitations": [],
+                "isAllDay": false,
+                "timeRange": {
+                  "disabledEditTimeRange": false,
+                  "turnOn": false,
+                  "repeatIteration": 1,
+                  "repeatPeriod": "week",
+                  "repeatDays": []
+                },
+                "timeZone": "Asia/Calcutta",
+                "ref": {
+                  "id": "68edd87e206a9cafd61e5c80",
+                  "source": "teamAndGroup"
+                }
+              }
+            }
+          }
+        },
+        "summary": "/calendar/event/create"
+      }
+    },
+    "/calendar/event/myevents/{teamId}": {
+      "get": {
+        "operationId": "_calendar_event_myevents_teamId_",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+            
+          {
+            "name": "teamId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68edd87e206a9cafd61e5c80"
+          }
+        ],
+        "summary": "/calendar/event/myevents/{teamId}"
+      }
+    },
+    "/project/creategroup": {
+      "post": {
+        "operationId": "_project_creategroup",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+            
+          {
+            "name": "team",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68f1a32f44854828f21fd2e1"
+          },
+          {
+            "name": "project",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68f1a32f44854828f21fd2dc"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "example": {
+                "project": "68edd87e206a9cafd61e5c7b",
+                "name": "Team Tiger",
+                "description": "",
+                "members": [
+                  "68ec783b206a9cafd61e41e6"
+                ],
+                "type": "team"
+              }
+            }
+          }
+        },
+        "summary": "/project/creategroup"
+      }
+    },
+    "/project/invite": {
+      "post": {
+        "operationId": "_project_invite",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+            
+          {
+            "name": "project",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68f1a32f44854828f21fd2dc"
+          },
+          {
+            "name": "team",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68f1a32f44854828f21fd2e1"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "example": {
+                "emails": [
+                  "workhubconnect77@gmail.com"
+                ],
+                "groups": [
+                  "68ee147e206a9cafd61e640e"
+                ],
+                "project": "68edd87e206a9cafd61e5c7b",
+                "position": [
+                  "administrator"
+                ]
+              }
+            }
+          }
+        },
+        "summary": "/project/invite"
+      }
+    },
+    "/project/group/update/{groupId}": {
+      "patch": {
+        "operationId": "_project_group_update_groupId_",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+            
+          {
+            "name": "groupId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68ee147e206a9cafd61e640e"
+          },
+          {
+            "name": "project",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68f1a32f44854828f21fd2dc"
+          },
+          {
+            "name": "team",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68f1a32f44854828f21fd2e1"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "example": {
+                "name": "Team Tiger",
+                "description": ""
+              }
+            }
+          }
+        },
+        "summary": "/project/group/update/{groupId}"
+      }
+    },
+    "/organization/clone-project": {
+      "post": {
+        "operationId": "_organization_clone_project",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+            
+          {
+            "name": "project",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68f1a32f44854828f21fd2dc"
+          },
+          {
+            "name": "team",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68f1a32f44854828f21fd2e1"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "example": {
+                "name": "Waterfall P1 14 clone",
+                "organizationId": "68ecb77e206a9cafd61e48ad",
+                "project": {
+                  "projectId": "68edd87e206a9cafd61e5c7b",
+                  "items": true,
+                  "groups": true,
+                  "sprints": true,
+                  "retros": true,
+                  "retroComments": true,
+                  "wikis": true,
+                  "queries": true
+                }
+              }
+            }
+          }
+        },
+        "summary": "/organization/clone-project"
+      }
+    },
+    "/test-plan/test-result/get": {
+      "get": {
+        "operationId": "_test_plan_test_result_get_502_",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+            
+          {
+            "name": "project",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68edd87e206a9cafd61e5c7b"
+          },
+          {
+            "name": "team",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68edd87e206a9cafd61e5c80"
+          }
+        ],
+        "summary": "/test-plan/test-result/get 502**"
+      }
+    },
+    "/user/dashboard": {
+      "post": {
+        "operationId": "_user_dashboard",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+             
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "example": {
+                "TestConfig": {
+                  "timeRange": "monthly"
+                }
+              }
+            }
+          }
+        },
+        "summary": "/user/dashboard"
+      }
+    },
+    "/project/item/clone/{itemId}": {
+      "post": {
+        "operationId": "_project_item_clone_itemId_",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+            
+          {
+            "name": "itemId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68ee1bc72667dcc6a87c08d0"
+          },
+          {
+            "name": "project",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68f1a32f44854828f21fd2dc"
+          },
+          {
+            "name": "team",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68f1a32f44854828f21fd2e1"
+          }
+        ],
+        "summary": "/project/item/clone/{itemId}"
+      }
+    },
+    "/project/item/delete/{itemId}": {
+      "delete": {
+        "operationId": "_project_item_delete_item_",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+            
+          {
+            "name": "itemId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68ee1c502667dcc6a87c0940"
+          },
+          {
+            "name": "project",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68f1a32f44854828f21fd2dc"
+          },
+          {
+            "name": "team",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68f1a32f44854828f21fd2e1"
+          }
+        ],
+        "summary": "/project/item/delete/{item}"
+      }
+    },
+    "/project/item/create": {
+      "post": {
+        "operationId": "_project_item_create",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+            
+          {
+            "name": "project",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68f1a32f44854828f21fd2dc"
+          },
+          {
+            "name": "team",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68f1a32f44854828f21fd2e1"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "example": {
+                "title": "E1",
+                "tabs": [
+                  {
+                    "fieldData": {
+                      "options": []
+                    },
+                    "uid": "4371be63-97c0-4cc3-ba0d-1cd08fe4544a",
+                    "type": "tab",
+                    "title": "Epic Details",
+                    "index": 0,
+                    "_id": "68edd87e206a9cafd61e5c95"
+                  },
+                  {
+                    "fieldData": {
+                      "options": []
+                    },
+                    "uid": "cf042cd8-9688-433e-b5cf-d98b9ed57e70",
+                    "type": "row",
+                    "title": "Epic Info",
+                    "index": 0,
+                    "parent": "4371be63-97c0-4cc3-ba0d-1cd08fe4544a",
+                    "_id": "68edd87e206a9cafd61e5c96"
+                  },
+                  {
+                    "fieldData": {
+                      "options": []
+                    },
+                    "uid": "97da2b67-bac9-4dfd-9413-f980f51f1cca",
+                    "type": "column",
+                    "title": "Epic Metadata",
+                    "index": 0,
+                    "parent": "cf042cd8-9688-433e-b5cf-d98b9ed57e70",
+                    "width": 100,
+                    "_id": "68edd87e206a9cafd61e5c97"
+                  },
+                  {
+                    "fieldData": {
+                      "fieldType": "short_text",
+                      "isDefault": false,
+                      "isRequired": false,
+                      "description": "Summary of the Epic",
+                      "defaultValue": "",
+                      "options": []
+                    },
+                    "uid": "fe90f8ea-0f83-45a0-9e19-e5ac7d353e2c",
+                    "type": "field",
+                    "title": "Epic Summary",
+                    "index": 0,
+                    "parent": "97da2b67-bac9-4dfd-9413-f980f51f1cca",
+                    "_id": "68edd87e206a9cafd61e5c98"
+                  }
+                ],
+                "issueType": "68edd87e206a9cafd61e5c94",
+                "state": "TO DO",
+                "tags": [],
+                "team": "68edd87e206a9cafd61e5c80",
+                "priority": "low",
+                "assignedTo": "68ec783b206a9cafd61e41e6",
+                "discussions": [],
+                "attachments": [],
+                "status": "68edd87e206a9cafd61e5cad",
+                "parent": null,
+                "_id": "ad24576f-a86e-445f-a988-d8844eb39296",
+                "updatedAt": "2025-10-14T09:50:57.806Z"
+              }
+            }
+          }
+        },
+        "summary": "/project/item/create"
+      }
+    },
+    "/sprint/create": {
+      "post": {
+        "operationId": "_sprint_create",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+            
+          {
+            "name": "project",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68f1a32f44854828f21fd2dc"
+          },
+          {
+            "name": "team",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68f1a32f44854828f21fd2e1"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "example": {
+                "name": "S51",
+                "duration": 14,
+                "team": "68f1a32f44854828f21fd2e1",
+                "endDate": "2025-10-28T09:53:50.030Z",
+                "startDate": "2025-10-14T09:53:50.030Z"
+              }
+            }
+          }
+        },
+        "summary": "/sprint/create"
+      }
+    },
+    "/query/myquery": {
+      "get": {
+        "operationId": "_query_myquery",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+            
+          {
+            "name": "project",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68edd87e206a9cafd61e5c7b"
+          },
+          {
+            "name": "team",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68edd87e206a9cafd61e5c80"
+          }
+        ],
+        "summary": "/query/myquery"
+      }
+    },
+    "/query/get-folder": {
+      "get": {
+        "operationId": "_query_get_folder",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+            
+          {
+            "name": "project",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68edd87e206a9cafd61e5c7b"
+          },
+          {
+            "name": "team",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68edd87e206a9cafd61e5c80"
+          }
+        ],
+        "summary": "/query/get-folder"
+      }
+    },
+    "/collection/get": {
+      "post": {
+        "operationId": "_collection_get",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+            
+          {
+            "name": "project",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68edd87e206a9cafd61e5c7b"
+          },
+          {
+            "name": "team",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68edd87e206a9cafd61e5c80"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "example": {
+                "workspace": null
+              }
+            }
+          }
+        },
+        "summary": "/collection/get"
+      }
+    },
+    "/collection/import-file/68ee1ef52667dcc6a87c0b1b": {
+      "post": {
+        "operationId": "_collection_import_file_68ee1ef52667dcc6a87c0b1b_",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+            
+          {
+            "name": "project",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68edd87e206a9cafd61e5c7b"
+          },
+          {
+            "name": "team",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68edd87e206a9cafd61e5c80"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "/collection/import-file/68ee1ef52667dcc6a87c0b1b***"
+      }
+    },
+    "/collection/environment/create/{collectionId}": {
+      "post": {
+        "operationId": "_collection_environment_create_collectionId_",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+            
+          {
+            "name": "collectionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68ee1ef52667dcc6a87c0b1b"
+          },
+          {
+            "name": "project",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68edd87e206a9cafd61e5c7b"
+          },
+          {
+            "name": "team",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68edd87e206a9cafd61e5c80"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "example": {
+                "name": "Master"
+              }
+            }
+          }
+        },
+        "summary": "/collection/environment/create/{collectionId}"
+      }
+    },
+    "/collection/update/{collectionId}": {
+      "patch": {
+        "operationId": "_collection_update_collectionId_",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+            
+          {
+            "name": "collectionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68ef56fd44854828f21f716f"
+          },
+          {
+            "name": "project",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68edd87e206a9cafd61e5c7b"
+          },
+          {
+            "name": "team",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68edd87e206a9cafd61e5c80"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "example": {
+                "data": {
+                  "_id": "68ef56fd44854828f21f716f",
+                  "name": "Bizcoms",
+                  "createdBy": "68ec783b206a9cafd61e41e6",
+                  "workspace": "68ee1ef52667dcc6a87c0b1b",
+                  "items": [],
+                  "type": "collection",
+                  "dataType": "JSON",
+                  "queryParams": [],
+                  "headers": [],
+                  "test": "",
+                  "variables": [
+                    {
+                      "initialValue": "",
+                      "currentValue": "",
+                      "checked": true,
+                      "_id": "66430f417bc9b0365c64e242"
+                    }
+                  ],
+                  "formData": [],
+                  "urlencodedData": [],
+                  "__v": 0,
+                  "createdAt": "2025-10-15T08:10:40.382Z",
+                  "updatedAt": "2025-10-15T08:10:40.382Z",
+                  "authorization": {
+                    "type": "bearerToken",
+                    "bearerToken": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGVjNzgzYjIwNmE5Y2FmZDYxZTQxZTYiLCJlbWFpbCI6IndvcmtodWJjb25uZWN0NzdAZ21haWwuY29tIiwiaWF0IjoxNzYwNDMyNDc1LCJleHAiOjE3NjA1MTg4NzV9.JuHy4vM2pirVtrtNKmjjuo0dCqw1WZBcamiZPpsHrXY"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "/collection/update/{collectionId}"
+      }
+    },
+    "/collection/monitor/get/{collectionId}": {
+      "get": {
+        "operationId": "_collection_monitor_get_collectionId_",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+            
+          {
+            "name": "collectionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68ee1ef52667dcc6a87c0b1b"
+          },
+          {
+            "name": "project",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68edd87e206a9cafd61e5c7b"
+          },
+          {
+            "name": "team",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68edd87e206a9cafd61e5c80"
+          }
+        ],
+        "summary": "/collection/monitor/get/{collectionId}"
+      }
+    },
+    "/collection/monitor/create": {
+      "post": {
+        "operationId": "_collection_monitor_create",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+            
+          {
+            "name": "project",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68edd87e206a9cafd61e5c7b"
+          },
+          {
+            "name": "team",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68edd87e206a9cafd61e5c80"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "example": {
+                "name": "Dailyscan",
+                "collection": "68ef56fd44854828f21f716f",
+                "environment": "68ef575b44854828f21f78d3",
+                "cronValue": "5 5 * * *",
+                "emailNotification": {
+                  "receive": true,
+                  "emails": [
+                    "workhubconnect77@gmail.com"
+                  ]
+                },
+                "timeout": 10000,
+                "isActive": true
+              }
+            }
+          }
+        },
+        "summary": "/collection/monitor/create"
+      }
+    },
+    "/collection/monitor/results/{resultId}": {
+      "get": {
+        "operationId": "_collection_monitor_results_resultId_",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+            
+          {
+            "name": "resultId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68ef593744854828f21f792b"
+          },
+          {
+            "name": "project",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68edd87e206a9cafd61e5c7b"
+          },
+          {
+            "name": "team",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68edd87e206a9cafd61e5c80"
+          }
+        ],
+        "summary": "/collection/monitor/results/{resultId}"
+      }
+    },
+    "/test-plan/test-strategy/create": {
+      "post": {
+        "operationId": "_test_plan_test_strategy_create",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+            
+          {
+            "name": "project",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68edd87e206a9cafd61e5c7b"
+          },
+          {
+            "name": "team",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68edd87e206a9cafd61e5c80"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "example": {
+                "title": "Strategy Main",
+                "description": "First scan login API",
+                "team": "68ee147e206a9cafd61e640e",
+                "image": null,
+                "parent": null
+              }
+            }
+          }
+        },
+        "summary": "/test-plan/test-strategy/create"
+      }
+    },
+    "/notification/get-subscription/test-strategy/{subscriptionId}": {
+      "get": {
+        "operationId": "_notification_get_subscription_test_strategy_subscriptionId_",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+            
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68ef5a3e44854828f21f7a3f"
+          },
+          {
+            "name": "project",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68edd87e206a9cafd61e5c7b"
+          },
+          {
+            "name": "team",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68edd87e206a9cafd61e5c80"
+          }
+        ],
+        "summary": "/notification/get-subscription/test-strategy/{subscriptionId}"
+      }
+    },
+    "/history/get-api-history": {
+      "get": {
+        "operationId": "_history_get_api_history",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+            
+          {
+            "name": "project",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68edd87e206a9cafd61e5c7b"
+          },
+          {
+            "name": "team",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68edd87e206a9cafd61e5c80"
+          }
+        ],
+        "summary": "/history/get-api-history"
+      }
+    },
+    "/collection/workspace/create": {
+      "post": {
+        "operationId": "_collection_workspace_create",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+            
+          {
+            "name": "project",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68edd87e206a9cafd61e5c7b"
+          },
+          {
+            "name": "team",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68edd87e206a9cafd61e5c80"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "example": {
+                "name": "Collage",
+                "description": "This is where we work.",
+                "type": "personal",
+                "members": []
+              }
+            }
+          }
+        },
+        "summary": "/collection/workspace/create"
+      }
+    },
+    "/validate/save-validator": {
+      "post": {
+        "operationId": "_validate_save_validator",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+            
+          {
+            "name": "project",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68edd87e206a9cafd61e5c7b"
+          },
+          {
+            "name": "team",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68edd87e206a9cafd61e5c80"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "example": {
+                "toolTitle": "json2yaml",
+                "title": "script1",
+                "linkTo": [
+                  "68ee1bc72667dcc6a87c08d0"
+                ],
+                "plainText": "{\r\n  \"info\": {\r\n    \"name\": \"App Basic Tests\",\r\n    \"schema\": \"https://schema.getpostman.com/json/collection/v2.1.0/collection.json\"\r\n  },\r\n  \"item\": [\r\n    {\r\n      \"name\": \"Health Check\",\r\n      \"request\": {\r\n        \"method\": \"GET\",\r\n        \"url\": \"{{baseUrl}}/health\"\r\n      }\r\n    },\r\n    {\r\n      \"name\": \"Login\",\r\n      \"request\": {\r\n        \"method\": \"POST\",\r\n        \"header\": [{ \"key\": \"Content-Type\", \"value\": \"application/json\" }],\r\n        \"body\": {\r\n          \"mode\": \"raw\",\r\n          \"raw\": \"{ \\\"email\\\": \\\"{{email}}\\\", \\\"password\\\": \\\"{{password}}\\\" }\"\r\n        },\r\n        \"url\": \"{{baseUrl}}/auth/login\"\r\n      },\r\n      \"event\": [\r\n        {\r\n          \"listen\": \"test\",\r\n          \"script\": {\r\n            \"exec\": [\r\n              \"let res = pm.response.json();\",\r\n              \"pm.environment.set('token', res.token || res.data?.token);\",\r\n              \"pm.test('Login works', () => pm.response.to.have.status(200));\"\r\n            ]\r\n          }\r\n        }\r\n      ]\r\n    },\r\n    {\r\n      \"name\": \"Profile\",\r\n      \"request\": {\r\n        \"method\": \"GET\",\r\n        \"header\": [{ \"key\": \"Authorization\", \"value\": \"Bearer {{token}}\" }],\r\n        \"url\": \"{{baseUrl}}/user/profile\"\r\n      }\r\n    }\r\n  ],\r\n  \"variable\": [\r\n    { \"key\": \"baseUrl\", \"value\": \"https://api.example.com\" },\r\n    { \"key\": \"email\", \"value\": \"test@example.com\" },\r\n    { \"key\": \"password\", \"value\": \"Passw0rd!\" }\r\n  ]\r\n}",
+                "convertText": "info:\n  name: App Basic Tests\n  schema: https://schema.getpostman.com/json/collection/v2.1.0/collection.json\nitem:\n  - name: Health Check\n    request:\n      method: GET\n      url: '{{baseUrl}}/health'\n  - name: Login\n    request:\n      method: POST\n      header:\n        - key: Content-Type\n          value: application/json\n      body:\n        mode: raw\n        raw: '{ \"email\": \"{{email}}\", \"password\": \"{{password}}\" }'\n      url: '{{baseUrl}}/auth/login'\n    event:\n      - listen: test\n        script:\n          exec:\n            - let res = pm.response.json();\n            - pm.environment.set('token', res.token || res.data?.token);\n            - pm.test('Login works', () => pm.response.to.have.status(200));\n  - name: Profile\n    request:\n      method: GET\n      header:\n        - key: Authorization\n          value: Bearer {{token}}\n      url: '{{baseUrl}}/user/profile'\nvariable:\n  - key: baseUrl\n    value: https://api.example.com\n  - key: email\n    value: test@example.com\n  - key: password\n    value: Passw0rd!\n",
+                "type": "private",
+                "visibility": {
+                  "scope": "private"
+                }
+              }
+            }
+          }
+        },
+        "summary": "/validate/save-validator"
+      }
+    },
+    "/test-plan/template/create": {
+      "post": {
+        "operationId": "_test_plan_template_create",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+            
+          {
+            "name": "project",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68edd87e206a9cafd61e5c7b"
+          },
+          {
+            "name": "team",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68edd87e206a9cafd61e5c80"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "example": {
+                "name": "Super",
+                "description": "",
+                "isAttachmentVisible": true,
+                "isDefault": true,
+                "fields": [
+                  {
+                    "id": "2",
+                    "title": "dde",
+                    "isVisible": true,
+                    "fieldType": "text"
+                  }
+                ],
+                "parent": ""
+              }
+            }
+          }
+        },
+        "summary": "/test-plan/template/create"
+      }
+    },
+    "/history/get-recycle-bin": {
+      "post": {
+        "operationId": "_history_get_recycle_bin",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+            
+          {
+            "name": "project",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68edd87e206a9cafd61e5c7b"
+          },
+          {
+            "name": "team",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68edd87e206a9cafd61e5c80"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "example": {
+                "collectionName": ""
+              }
+            }
+          }
+        },
+        "summary": "/history/get-recycle-bin"
+      }
+    },
+    "/calendar/event/delete/{eventId}": {
+      "delete": {
+        "operationId": "_calendar_event_delete_eventId_",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+            
+          {
+            "name": "eventId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68ee13f0206a9cafd61e63dc"
+          },
+          {
+            "name": "accept-language",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "en-GB,en-US;q=0.9,en;q=0.8"
+          },
+          {
+            "name": "dnt",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "1"
+          },
+          {
+            "name": "origin",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "https://project.bizcoms.ai"
+          },
+          {
+            "name": "priority",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "u=1, i"
+          },
+          {
+            "name": "project",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68edd87e206a9cafd61e5c7b"
+          },
+          {
+            "name": "team",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68edd87e206a9cafd61e5c80"
+          },
+          {
+            "name": "user-agent",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+          },
+          {
+            "name": "Cookie",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "organization=68ecb77e206a9cafd61e48ad; refresh_token_prod=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGVjNzgzYjIwNmE5Y2FmZDYxZTQxZTYiLCJlbWFpbCI6IndvcmtodWJjb25uZWN0NzdAZ21haWwuY29tIiwiaWF0IjoxNzYwNTI5MTI5LCJleHAiOjE3NzYwODExMjksInN1YiI6InJlZnJlc2hfdG9rZW5fcHJvZCJ9.LxQJ5jS5ZCwrKkR6qqEklqnQDBlJnfkVgpHiZPkkiUs; pmcrm_token_prod=Bearer%20eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGVjNzgzYjIwNmE5Y2FmZDYxZTQxZTYiLCJlbWFpbCI6IndvcmtodWJjb25uZWN0NzdAZ21haWwuY29tIiwiaWF0IjoxNzYwNTI5MTI5LCJleHAiOjE3NjA2MTU1Mjl9.XzYLwChbF3N3zXDGZI-RrHHoD2GuAOgCSg8o4oZjFmI; orbitTaskLogout=false"
+          }
+        ],
+        "summary": "/calendar/event/delete/{eventId}"
+      }
+    },
+    "/calendar/event/details/{eventId}": {
+      "get": {
+        "operationId": "_calendar_event_details_eventId_",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+            
+          {
+            "name": "eventId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68ee13f0206a9cafd61e63dc"
+          },
+          {
+            "name": "project",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68edd87e206a9cafd61e5c7b"
+          },
+          {
+            "name": "team",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68edd87e206a9cafd61e5c80"
+          }
+        ],
+        "summary": "/calendar/event/details/{eventId}"
+      }
+    },
+    "/calendar/schedule/all": {
+      "get": {
+        "operationId": "_calendar_schedule_all",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+            
+          {
+            "name": "accept-language",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "en-GB,en-US;q=0.9,en;q=0.8"
+          },
+          {
+            "name": "dnt",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "1"
+          },
+          {
+            "name": "origin",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "https://project.bizcoms.ai"
+          },
+          {
+            "name": "priority",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "u=1, i"
+          },
+          {
+            "name": "project",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68edd87e206a9cafd61e5c7b"
+          },
+          {
+            "name": "team",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68edd87e206a9cafd61e5c80"
+          },
+          {
+            "name": "user-agent",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+          },
+          {
+            "name": "Cookie",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "organization=68ecb77e206a9cafd61e48ad; refresh_token_prod=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGVjNzgzYjIwNmE5Y2FmZDYxZTQxZTYiLCJlbWFpbCI6IndvcmtodWJjb25uZWN0NzdAZ21haWwuY29tIiwiaWF0IjoxNzYwNTI5MTI5LCJleHAiOjE3NzYwODExMjksInN1YiI6InJlZnJlc2hfdG9rZW5fcHJvZCJ9.LxQJ5jS5ZCwrKkR6qqEklqnQDBlJnfkVgpHiZPkkiUs; pmcrm_token_prod=Bearer%20eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGVjNzgzYjIwNmE5Y2FmZDYxZTQxZTYiLCJlbWFpbCI6IndvcmtodWJjb25uZWN0NzdAZ21haWwuY29tIiwiaWF0IjoxNzYwNTI5MTI5LCJleHAiOjE3NjA2MTU1Mjl9.XzYLwChbF3N3zXDGZI-RrHHoD2GuAOgCSg8o4oZjFmI; orbitTaskLogout=false"
+          }
+        ],
+        "summary": "/calendar/schedule/all"
+      }
+    },
+    "/calendar/schedule/create": {
+      "post": {
+        "operationId": "_calendar_schedule_create",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+             
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "example": {
+                "name": "Schedule Day1"
+              }
+            }
+          }
+        },
+        "summary": "/calendar/schedule/create"
+      }
+    },
+    "/calendar/schedule/update/{scheduleId}": {
+      "patch": {
+        "operationId": "_calendar_schedule_update_scheduleId_",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+            
+          {
+            "name": "scheduleId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "68ef8d4544854828f21f8ea6"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "example": {
+                "availability": [
+                  {
+                    "type": "date",
+                    "intervals": [
+                      {
+                        "from": "09:00",
+                        "to": "17:00"
+                      }
+                    ],
+                    "date": "2025-10-22T18:30:00.000Z"
+                  }
+                ],
+                "name": "Schedule Day1",
+                "timeZone": "Asia/Calcutta"
+              }
+            }
+          }
+        },
+        "summary": "/calendar/schedule/update/{scheduleId}"
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ]
+}
