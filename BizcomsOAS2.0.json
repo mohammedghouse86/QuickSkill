@@ -1,0 +1,3780 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Captured API Documentation",
+    "version": "1.0.0",
+    "description": "Auto-generated OpenAPI specification from captured network requests."
+  },
+  "servers": [
+    {
+      "url": "https://api.bizcoms.ai"
+    }
+  ],
+  "paths": {
+    "/api/v2/calendar/event/{eventId}": {
+      "get": {
+        "summary": "GET /api/v2/calendar/event/{eventId}",
+        "description": "Auto-generated from observed network traffic.",
+        "tags": [
+          "api.bizcoms.ai"
+        ],
+        "parameters": [
+          {
+            "name": "eventId",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier for the event resource.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "HTTP 200 response",
+            "headers": {
+              "date": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Tue, 21 Oct 2025 14:26:21 GMT"
+              },
+              "content-type": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "application/json; charset=utf-8"
+              },
+              "content-length": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "15662"
+              },
+              "x-powered-by": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Express"
+              },
+              "access-control-allow-origin": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "https://project.bizcoms.ai"
+              },
+              "vary": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Origin"
+              },
+              "access-control-allow-credentials": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "true"
+              },
+              "etag": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "W/\"3d2e-8gwaUNathZhodMxl1qQWiFV+a4k\""
+              },
+              "strict-transport-security": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "max-age=15724800; includeSubDomains"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "example": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/chat/{chatId}": {
+      "get": {
+        "summary": "GET /api/v2/chat/{chatId}",
+        "description": "Auto-generated from observed network traffic.",
+        "tags": [
+          "api.bizcoms.ai"
+        ],
+        "parameters": [
+          {
+            "name": "chatId",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier for the chat resource.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "HTTP 200 response",
+            "headers": {
+              "date": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Tue, 21 Oct 2025 14:26:21 GMT"
+              },
+              "content-type": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "application/json; charset=utf-8"
+              },
+              "content-length": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "2299"
+              },
+              "x-powered-by": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Express"
+              },
+              "access-control-allow-origin": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "https://project.bizcoms.ai"
+              },
+              "vary": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Origin"
+              },
+              "access-control-allow-credentials": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "true"
+              },
+              "etag": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "W/\"8fb-MWNdXXBNfX12UPIAJojD/uy3UWc\""
+              },
+              "strict-transport-security": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "max-age=15724800; includeSubDomains"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "example": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/history/get": {
+      "post": {
+        "summary": "POST /api/v2/history/get",
+        "description": "Auto-generated from observed network traffic.",
+        "tags": [
+          "api.bizcoms.ai"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "itemId": {
+                    "type": "string",
+                    "example": "68f194e844854828f21fd0b6"
+                  },
+                  "modelName": {
+                    "type": "string",
+                    "example": "Organization_v2"
+                  }
+                },
+                "example": {
+                  "itemId": "68f194e844854828f21fd0b6",
+                  "modelName": "Organization_v2"
+                }
+              },
+              "example": {
+                "itemId": "68f194e844854828f21fd0b6",
+                "modelName": "Organization_v2"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "HTTP 200 response",
+            "headers": {
+              "date": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Tue, 21 Oct 2025 14:22:59 GMT"
+              },
+              "content-type": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "application/json; charset=utf-8"
+              },
+              "content-length": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "1151"
+              },
+              "x-powered-by": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Express"
+              },
+              "access-control-allow-origin": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "https://www.bizcoms.ai"
+              },
+              "vary": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Origin"
+              },
+              "access-control-allow-credentials": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "true"
+              },
+              "etag": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "W/\"47f-bJKN+oZdYZRafkoovIDz3KULYdA\""
+              },
+              "strict-transport-security": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "max-age=15724800; includeSubDomains"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "example": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/project/group/{groupId}": {
+      "get": {
+        "summary": "GET /api/v2/project/group/{groupId}",
+        "description": "Auto-generated from observed network traffic.",
+        "tags": [
+          "api.bizcoms.ai"
+        ],
+        "parameters": [
+          {
+            "name": "groupId",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier for the group resource.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "HTTP 200 response",
+            "headers": {
+              "date": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Tue, 21 Oct 2025 14:29:56 GMT"
+              },
+              "content-type": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "application/json; charset=utf-8"
+              },
+              "content-length": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "2590"
+              },
+              "x-powered-by": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Express"
+              },
+              "access-control-allow-origin": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "https://project.bizcoms.ai"
+              },
+              "vary": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Origin"
+              },
+              "access-control-allow-credentials": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "true"
+              },
+              "etag": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "W/\"a1e-mwQ/EWrtg1eSPFjOEGvWzTMMECs\""
+              },
+              "strict-transport-security": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "max-age=15724800; includeSubDomains"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "example": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/project/groups/{groupId}/all": {
+      "get": {
+        "summary": "GET /api/v2/project/groups/{groupId}/all",
+        "description": "Auto-generated from observed network traffic.",
+        "tags": [
+          "api.bizcoms.ai"
+        ],
+        "parameters": [
+          {
+            "name": "groupId",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier for the group resource.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "HTTP 200 response",
+            "headers": {
+              "date": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Tue, 21 Oct 2025 14:24:25 GMT"
+              },
+              "content-type": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "application/json; charset=utf-8"
+              },
+              "content-length": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "5305"
+              },
+              "x-powered-by": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Express"
+              },
+              "access-control-allow-origin": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "https://project.bizcoms.ai"
+              },
+              "vary": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Origin"
+              },
+              "access-control-allow-credentials": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "true"
+              },
+              "etag": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "W/\"14b9-3LSmaiHP/kC8tPtRbfBgEEVuqX0\""
+              },
+              "strict-transport-security": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "max-age=15724800; includeSubDomains"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "example": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/project/invite": {
+      "post": {
+        "summary": "POST /api/v2/project/invite",
+        "description": "Auto-generated from observed network traffic.",
+        "tags": [
+          "api.bizcoms.ai"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "emails": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "example": "mohammedghouse86.backup@gmail.com"
+                    },
+                    "example": [
+                      "mohammedghouse86.backup@gmail.com"
+                    ]
+                  },
+                  "groups": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "example": "68f1a32f44854828f21fd2e1"
+                    },
+                    "example": [
+                      "68f1a32f44854828f21fd2e1"
+                    ]
+                  },
+                  "project": {
+                    "type": "string",
+                    "example": "68f1a32f44854828f21fd2dc"
+                  },
+                  "position": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "example": "administrator"
+                    },
+                    "example": [
+                      "administrator"
+                    ]
+                  }
+                },
+                "example": {
+                  "emails": [
+                    "mohammedghouse86.backup@gmail.com"
+                  ],
+                  "groups": [
+                    "68f1a32f44854828f21fd2e1"
+                  ],
+                  "project": "68f1a32f44854828f21fd2dc",
+                  "position": [
+                    "administrator"
+                  ]
+                }
+              },
+              "example": {
+                "emails": [
+                  "mohammedghouse86.backup@gmail.com"
+                ],
+                "groups": [
+                  "68f1a32f44854828f21fd2e1"
+                ],
+                "project": "68f1a32f44854828f21fd2dc",
+                "position": [
+                  "administrator"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "HTTP 200 response",
+            "headers": {
+              "date": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Tue, 21 Oct 2025 14:24:41 GMT"
+              },
+              "content-type": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "application/json; charset=utf-8"
+              },
+              "content-length": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "68"
+              },
+              "x-powered-by": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Express"
+              },
+              "access-control-allow-origin": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "https://project.bizcoms.ai"
+              },
+              "vary": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Origin"
+              },
+              "access-control-allow-credentials": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "true"
+              },
+              "etag": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "W/\"44-cN8LN1oNdbqFT2SGEXR94GnopuM\""
+              },
+              "strict-transport-security": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "max-age=15724800; includeSubDomains"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "example": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/project/item/myitems": {
+      "get": {
+        "summary": "GET /api/v2/project/item/myitems",
+        "description": "Auto-generated from observed network traffic.",
+        "tags": [
+          "api.bizcoms.ai"
+        ],
+        "responses": {
+          "200": {
+            "description": "HTTP 200 response",
+            "headers": {
+              "date": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Tue, 21 Oct 2025 14:26:21 GMT"
+              },
+              "content-type": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "application/json; charset=utf-8"
+              },
+              "content-length": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "113"
+              },
+              "x-powered-by": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Express"
+              },
+              "access-control-allow-origin": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "https://project.bizcoms.ai"
+              },
+              "vary": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Origin"
+              },
+              "access-control-allow-credentials": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "true"
+              },
+              "etag": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "W/\"71-GkO2gN2Sj4KGhIfLtUixbKcYxDY\""
+              },
+              "strict-transport-security": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "max-age=15724800; includeSubDomains"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "example": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/project/totaluser/{totaluserId}": {
+      "get": {
+        "summary": "GET /api/v2/project/totaluser/{totaluserId}",
+        "description": "Auto-generated from observed network traffic.",
+        "tags": [
+          "api.bizcoms.ai"
+        ],
+        "parameters": [
+          {
+            "name": "totaluserId",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier for the totaluser resource.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "HTTP 200 response",
+            "headers": {
+              "date": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Tue, 21 Oct 2025 14:29:57 GMT"
+              },
+              "content-type": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "application/json; charset=utf-8"
+              },
+              "content-length": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "380"
+              },
+              "x-powered-by": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Express"
+              },
+              "access-control-allow-origin": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "https://project.bizcoms.ai"
+              },
+              "vary": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Origin"
+              },
+              "access-control-allow-credentials": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "true"
+              },
+              "etag": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "W/\"17c-mMJGJVXGtdGFc7FJ57dFuuV5GkE\""
+              },
+              "strict-transport-security": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "max-age=15724800; includeSubDomains"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "example": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/project/update/{updateId}": {
+      "put": {
+        "summary": "PUT /api/v2/project/update/{updateId}",
+        "description": "Auto-generated from observed network traffic.",
+        "tags": [
+          "api.bizcoms.ai"
+        ],
+        "parameters": [
+          {
+            "name": "updateId",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier for the update resource.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Waterfall52"
+                  },
+                  "description": {
+                    "type": "string",
+                    "example": "Traditional project management with sequential phases"
+                  },
+                  "type": {
+                    "type": "string",
+                    "example": "project"
+                  }
+                },
+                "example": {
+                  "name": "Waterfall52",
+                  "description": "Traditional project management with sequential phases",
+                  "type": "project"
+                }
+              },
+              "example": {
+                "name": "Waterfall52",
+                "description": "Traditional project management with sequential phases",
+                "type": "project"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "HTTP 200 response",
+            "headers": {
+              "date": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Tue, 21 Oct 2025 14:30:11 GMT"
+              },
+              "content-type": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "application/json; charset=utf-8"
+              },
+              "content-length": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "818"
+              },
+              "x-powered-by": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Express"
+              },
+              "access-control-allow-origin": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "https://project.bizcoms.ai"
+              },
+              "vary": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Origin"
+              },
+              "access-control-allow-credentials": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "true"
+              },
+              "etag": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "W/\"332-kHKWcrNyLawUUORFNRYYUWEUNkU\""
+              },
+              "strict-transport-security": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "max-age=15724800; includeSubDomains"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "example": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/project/workflow/get": {
+      "get": {
+        "summary": "GET /api/v2/project/workflow/get",
+        "description": "Auto-generated from observed network traffic.",
+        "tags": [
+          "api.bizcoms.ai"
+        ],
+        "responses": {
+          "200": {
+            "description": "HTTP 200 response",
+            "headers": {
+              "date": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Tue, 21 Oct 2025 14:24:50 GMT"
+              },
+              "content-type": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "application/json; charset=utf-8"
+              },
+              "content-length": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "2570"
+              },
+              "x-powered-by": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Express"
+              },
+              "access-control-allow-origin": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "https://project.bizcoms.ai"
+              },
+              "vary": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Origin"
+              },
+              "access-control-allow-credentials": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "true"
+              },
+              "etag": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "W/\"a0a-bvS9gLVNn36I2F25PhBRMn9wLnY\""
+              },
+              "strict-transport-security": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "max-age=15724800; includeSubDomains"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "example": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/project/{projectId}/gg/{ggId}": {
+      "get": {
+        "summary": "GET /api/v2/project/{projectId}/gg/{ggId}",
+        "description": "Auto-generated from observed network traffic.",
+        "tags": [
+          "api.bizcoms.ai"
+        ],
+        "parameters": [
+          {
+            "name": "ggId",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier for the gg resource.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "projectId",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier for the project resource.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "HTTP 200 response",
+            "headers": {
+              "date": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Tue, 21 Oct 2025 14:21:25 GMT"
+              },
+              "content-type": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "application/json; charset=utf-8"
+              },
+              "content-length": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "24447"
+              },
+              "x-powered-by": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Express"
+              },
+              "access-control-allow-origin": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "https://www.bizcoms.ai"
+              },
+              "vary": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Origin"
+              },
+              "access-control-allow-credentials": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "true"
+              },
+              "etag": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "W/\"5f7f-BQLk8cwkxt8MIftVq6eBvIpDzT8\""
+              },
+              "strict-transport-security": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "max-age=15724800; includeSubDomains"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "example": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/project/{projectId}/ghouseorg": {
+      "get": {
+        "summary": "GET /api/v2/project/{projectId}/ghouseorg",
+        "description": "Auto-generated from observed network traffic.",
+        "tags": [
+          "api.bizcoms.ai"
+        ],
+        "parameters": [
+          {
+            "name": "archive",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "false"
+            }
+          },
+          {
+            "name": "favorite",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "false"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "example": "8"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "example": "1"
+            }
+          },
+          {
+            "name": "params[limit]",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "example": "20"
+            }
+          },
+          {
+            "name": "params[page]",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "example": "1"
+            }
+          },
+          {
+            "name": "projectId",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier for the project resource.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "searchTerm",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "example": ""
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "HTTP 200 response",
+            "headers": {
+              "date": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Tue, 21 Oct 2025 14:25:23 GMT"
+              },
+              "x-powered-by": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Express"
+              },
+              "access-control-allow-origin": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "https://project.bizcoms.ai"
+              },
+              "vary": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Origin"
+              },
+              "access-control-allow-credentials": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "true"
+              },
+              "strict-transport-security": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "max-age=15724800; includeSubDomains"
+              },
+              "content-type": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "application/json; charset=utf-8"
+              },
+              "content-length": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "6972"
+              },
+              "etag": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "W/\"1b3c-voXcfe76BXC4dQdE9mr3oqU3bVY\""
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "example": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/project/{projectId}/{initialdataBySlugId}": {
+      "get": {
+        "summary": "GET /api/v2/project/{projectId}/{initialdataBySlugId}",
+        "description": "Auto-generated from observed network traffic.",
+        "tags": [
+          "api.bizcoms.ai"
+        ],
+        "parameters": [
+          {
+            "name": "initialdataBySlugId",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier for the initialdata By Slug resource.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "projectId",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier for the project resource.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "HTTP 200 response",
+            "headers": {
+              "date": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Tue, 21 Oct 2025 14:24:25 GMT"
+              },
+              "content-type": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "application/json; charset=utf-8"
+              },
+              "content-length": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "5357"
+              },
+              "x-powered-by": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Express"
+              },
+              "access-control-allow-origin": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "https://project.bizcoms.ai"
+              },
+              "vary": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Origin"
+              },
+              "access-control-allow-credentials": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "true"
+              },
+              "etag": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "W/\"14ed-TQVFkr2LX86SSD7WWJyLD2hA67w\""
+              },
+              "strict-transport-security": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "max-age=15724800; includeSubDomains"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "example": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/project/{projectId}/{projectbyslugId}": {
+      "get": {
+        "summary": "GET /api/v2/project/{projectId}/{projectbyslugId}",
+        "description": "Auto-generated from observed network traffic.",
+        "tags": [
+          "api.bizcoms.ai"
+        ],
+        "parameters": [
+          {
+            "name": "projectbyslugId",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier for the projectbyslug resource.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "projectId",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier for the project resource.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "HTTP 200 response",
+            "headers": {
+              "date": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Tue, 21 Oct 2025 14:30:11 GMT"
+              },
+              "content-type": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "application/json; charset=utf-8"
+              },
+              "content-length": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "7141"
+              },
+              "x-powered-by": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Express"
+              },
+              "access-control-allow-origin": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "https://project.bizcoms.ai"
+              },
+              "vary": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Origin"
+              },
+              "access-control-allow-credentials": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "true"
+              },
+              "etag": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "W/\"1be5-rixpexMEeFGvOWHV7oqznxnR/SU\""
+              },
+              "strict-transport-security": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "max-age=15724800; includeSubDomains"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "example": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/retro/get": {
+      "get": {
+        "summary": "GET /api/v2/retro/get",
+        "description": "Auto-generated from observed network traffic.",
+        "tags": [
+          "api.bizcoms.ai"
+        ],
+        "responses": {
+          "200": {
+            "description": "HTTP 200 response",
+            "headers": {
+              "date": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Tue, 21 Oct 2025 14:26:21 GMT"
+              },
+              "content-type": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "application/json; charset=utf-8"
+              },
+              "content-length": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "176"
+              },
+              "x-powered-by": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Express"
+              },
+              "access-control-allow-origin": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "https://project.bizcoms.ai"
+              },
+              "vary": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Origin"
+              },
+              "access-control-allow-credentials": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "true"
+              },
+              "etag": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "W/\"b0-QibUJbxNMgnQDAk6leB4JNfRALQ\""
+              },
+              "strict-transport-security": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "max-age=15724800; includeSubDomains"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "example": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/sprint/mysprints": {
+      "get": {
+        "summary": "GET /api/v2/sprint/mysprints",
+        "description": "Auto-generated from observed network traffic.",
+        "tags": [
+          "api.bizcoms.ai"
+        ],
+        "responses": {
+          "200": {
+            "description": "HTTP 200 response",
+            "headers": {
+              "date": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Tue, 21 Oct 2025 14:26:21 GMT"
+              },
+              "content-type": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "application/json; charset=utf-8"
+              },
+              "content-length": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "3363"
+              },
+              "x-powered-by": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Express"
+              },
+              "access-control-allow-origin": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "https://project.bizcoms.ai"
+              },
+              "vary": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Origin"
+              },
+              "access-control-allow-credentials": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "true"
+              },
+              "etag": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "W/\"d23-5rYeiEN2dmPFE7FoyjplGWPrcKI\""
+              },
+              "strict-transport-security": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "max-age=15724800; includeSubDomains"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "example": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/test-plan/parameter/get": {
+      "get": {
+        "summary": "GET /api/v2/test-plan/parameter/get",
+        "description": "Auto-generated from observed network traffic.",
+        "tags": [
+          "api.bizcoms.ai"
+        ],
+        "responses": {
+          "201": {
+            "description": "HTTP 201 response",
+            "headers": {
+              "date": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Tue, 21 Oct 2025 14:26:21 GMT"
+              },
+              "content-type": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "application/json; charset=utf-8"
+              },
+              "content-length": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "70"
+              },
+              "x-powered-by": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Express"
+              },
+              "access-control-allow-origin": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "https://project.bizcoms.ai"
+              },
+              "vary": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Origin"
+              },
+              "access-control-allow-credentials": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "true"
+              },
+              "etag": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "W/\"46-RzhjdJLJztQMZ2SxUjceECPjCuk\""
+              },
+              "strict-transport-security": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "max-age=15724800; includeSubDomains"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "example": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/test-plan/template/get": {
+      "get": {
+        "summary": "GET /api/v2/test-plan/template/get",
+        "description": "Auto-generated from observed network traffic.",
+        "tags": [
+          "api.bizcoms.ai"
+        ],
+        "responses": {
+          "201": {
+            "description": "HTTP 201 response",
+            "headers": {
+              "date": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Tue, 21 Oct 2025 14:26:21 GMT"
+              },
+              "content-type": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "application/json; charset=utf-8"
+              },
+              "content-length": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "69"
+              },
+              "x-powered-by": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Express"
+              },
+              "access-control-allow-origin": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "https://project.bizcoms.ai"
+              },
+              "vary": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Origin"
+              },
+              "access-control-allow-credentials": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "true"
+              },
+              "etag": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "W/\"45-39aUHzNp8Z2ZpzAwIvh+dwEjfAw\""
+              },
+              "strict-transport-security": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "max-age=15724800; includeSubDomains"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "example": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/test-plan/{test-planId}/get": {
+      "get": {
+        "summary": "GET /api/v2/test-plan/{test-planId}/get",
+        "description": "Auto-generated from observed network traffic.",
+        "tags": [
+          "api.bizcoms.ai"
+        ],
+        "parameters": [
+          {
+            "name": "test-planId",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier for the test-plan resource.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "HTTP 200 response",
+            "headers": {
+              "date": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Tue, 21 Oct 2025 14:26:21 GMT"
+              },
+              "content-type": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "application/json; charset=utf-8"
+              },
+              "content-length": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "6382"
+              },
+              "x-powered-by": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Express"
+              },
+              "access-control-allow-origin": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "https://project.bizcoms.ai"
+              },
+              "vary": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Origin"
+              },
+              "access-control-allow-credentials": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "true"
+              },
+              "etag": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "W/\"18ee-0eYBheLQWk95ipndB43P4P3aI5s\""
+              },
+              "strict-transport-security": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "max-age=15724800; includeSubDomains"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "example": {}
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "HTTP 201 response",
+            "headers": {
+              "date": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Tue, 21 Oct 2025 14:26:21 GMT"
+              },
+              "content-type": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "application/json; charset=utf-8"
+              },
+              "content-length": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "331"
+              },
+              "x-powered-by": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Express"
+              },
+              "access-control-allow-origin": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "https://project.bizcoms.ai"
+              },
+              "vary": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Origin"
+              },
+              "access-control-allow-credentials": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "true"
+              },
+              "etag": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "W/\"14b-Ix+PN+Yrw5n3kjtcZ5PGeMaJbg4\""
+              },
+              "strict-transport-security": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "max-age=15724800; includeSubDomains"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "example": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/user/dashboard": {
+      "post": {
+        "summary": "POST /api/v2/user/dashboard",
+        "description": "Auto-generated from observed network traffic.",
+        "tags": [
+          "api.bizcoms.ai"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "SprintProg": {
+                    "type": "object",
+                    "properties": {
+                      "sprintId": {
+                        "type": "string",
+                        "example": ""
+                      }
+                    },
+                    "example": {
+                      "sprintId": ""
+                    }
+                  },
+                  "OverView": {
+                    "type": "object",
+                    "properties": {},
+                    "example": {}
+                  },
+                  "AllSprint": {
+                    "type": "object",
+                    "properties": {},
+                    "example": {}
+                  },
+                  "Sprints": {
+                    "type": "object",
+                    "properties": {},
+                    "example": {}
+                  },
+                  "TestCaseTemp": {
+                    "type": "object",
+                    "properties": {},
+                    "example": {}
+                  },
+                  "TestPlan": {
+                    "type": "object",
+                    "properties": {},
+                    "example": {}
+                  },
+                  "UserSprint": {
+                    "type": "object",
+                    "properties": {},
+                    "example": {}
+                  },
+                  "sprintData": {
+                    "type": "object",
+                    "properties": {},
+                    "example": {}
+                  },
+                  "BoardInfo": {
+                    "type": "object",
+                    "properties": {},
+                    "example": {}
+                  },
+                  "workItem": {
+                    "type": "object",
+                    "properties": {
+                      "sprintId": {
+                        "type": "string",
+                        "example": ""
+                      }
+                    },
+                    "example": {
+                      "sprintId": ""
+                    }
+                  },
+                  "SprintsOv": {
+                    "type": "object",
+                    "properties": {
+                      "sprintId": {
+                        "type": "string",
+                        "example": ""
+                      }
+                    },
+                    "example": {
+                      "sprintId": ""
+                    }
+                  },
+                  "TestConfig": {
+                    "type": "object",
+                    "properties": {
+                      "timeRange": {
+                        "type": "string",
+                        "example": "yearly"
+                      }
+                    },
+                    "example": {
+                      "timeRange": "yearly"
+                    }
+                  },
+                  "TestCase": {
+                    "type": "object",
+                    "properties": {},
+                    "example": {}
+                  },
+                  "Queries": {
+                    "type": "object",
+                    "properties": {
+                      "timeRange": {
+                        "type": "string",
+                        "example": "yearly"
+                      }
+                    },
+                    "example": {
+                      "timeRange": "yearly"
+                    }
+                  },
+                  "ChatAndCalender": {
+                    "type": "object",
+                    "properties": {},
+                    "example": {}
+                  },
+                  "Retro": {
+                    "type": "object",
+                    "properties": {},
+                    "example": {}
+                  }
+                },
+                "example": {
+                  "SprintProg": {
+                    "sprintId": ""
+                  },
+                  "OverView": {},
+                  "AllSprint": {},
+                  "Sprints": {},
+                  "TestCaseTemp": {},
+                  "TestPlan": {},
+                  "UserSprint": {},
+                  "sprintData": {},
+                  "BoardInfo": {},
+                  "workItem": {
+                    "sprintId": ""
+                  },
+                  "SprintsOv": {
+                    "sprintId": ""
+                  },
+                  "TestConfig": {
+                    "timeRange": "yearly"
+                  },
+                  "TestCase": {},
+                  "Queries": {
+                    "timeRange": "yearly"
+                  },
+                  "ChatAndCalender": {},
+                  "Retro": {}
+                }
+              },
+              "example": {
+                "SprintProg": {
+                  "sprintId": ""
+                },
+                "OverView": {},
+                "AllSprint": {},
+                "Sprints": {},
+                "TestCaseTemp": {},
+                "TestPlan": {},
+                "UserSprint": {},
+                "sprintData": {},
+                "BoardInfo": {},
+                "workItem": {
+                  "sprintId": ""
+                },
+                "SprintsOv": {
+                  "sprintId": ""
+                },
+                "TestConfig": {
+                  "timeRange": "yearly"
+                },
+                "TestCase": {},
+                "Queries": {
+                  "timeRange": "yearly"
+                },
+                "ChatAndCalender": {},
+                "Retro": {}
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "HTTP 400 response",
+            "headers": {
+              "date": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Tue, 21 Oct 2025 14:26:22 GMT"
+              },
+              "content-type": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "application/json; charset=utf-8"
+              },
+              "content-length": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "152"
+              },
+              "x-powered-by": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Express"
+              },
+              "access-control-allow-origin": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "https://project.bizcoms.ai"
+              },
+              "vary": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Origin"
+              },
+              "access-control-allow-credentials": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "true"
+              },
+              "etag": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "W/\"98-8Gb4TZ1OtB56RgUkZkV+8M4Ih/A\""
+              },
+              "strict-transport-security": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "max-age=15724800; includeSubDomains"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "example": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/user/get-pin/work-item": {
+      "get": {
+        "summary": "GET /api/v2/user/get-pin/work-item",
+        "description": "Auto-generated from observed network traffic.",
+        "tags": [
+          "api.bizcoms.ai"
+        ],
+        "responses": {
+          "200": {
+            "description": "HTTP 200 response",
+            "headers": {
+              "date": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Tue, 21 Oct 2025 14:26:22 GMT"
+              },
+              "content-type": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "application/json; charset=utf-8"
+              },
+              "content-length": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "67"
+              },
+              "x-powered-by": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Express"
+              },
+              "access-control-allow-origin": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "https://project.bizcoms.ai"
+              },
+              "vary": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Origin"
+              },
+              "access-control-allow-credentials": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "true"
+              },
+              "etag": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "W/\"43-PaCX+/mlBYntfPwuaY5hSx0ghgw\""
+              },
+              "strict-transport-security": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "max-age=15724800; includeSubDomains"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "example": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/user/get-theme": {
+      "get": {
+        "summary": "GET /api/v2/user/get-theme",
+        "description": "Auto-generated from observed network traffic.",
+        "tags": [
+          "api.bizcoms.ai"
+        ],
+        "responses": {
+          "200": {
+            "description": "HTTP 200 response",
+            "headers": {
+              "date": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Tue, 21 Oct 2025 14:26:21 GMT"
+              },
+              "content-type": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "application/json; charset=utf-8"
+              },
+              "content-length": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "69"
+              },
+              "x-powered-by": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Express"
+              },
+              "access-control-allow-origin": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "https://project.bizcoms.ai"
+              },
+              "vary": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Origin"
+              },
+              "access-control-allow-credentials": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "true"
+              },
+              "etag": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "W/\"45-6u2XyMleAJP5uwJMnEt+34lMk58\""
+              },
+              "strict-transport-security": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "max-age=15724800; includeSubDomains"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "example": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/user/get-user/{get-userId}": {
+      "get": {
+        "summary": "GET /api/v2/user/get-user/{get-userId}",
+        "description": "Auto-generated from observed network traffic.",
+        "tags": [
+          "api.bizcoms.ai"
+        ],
+        "parameters": [
+          {
+            "name": "get-userId",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier for the get-user resource.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "HTTP 200 response",
+            "headers": {
+              "date": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Tue, 21 Oct 2025 14:24:25 GMT"
+              },
+              "content-type": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "application/json; charset=utf-8"
+              },
+              "content-length": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "811"
+              },
+              "x-powered-by": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Express"
+              },
+              "access-control-allow-origin": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "https://project.bizcoms.ai"
+              },
+              "vary": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Origin"
+              },
+              "access-control-allow-credentials": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "true"
+              },
+              "etag": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "W/\"32b-V8O66G7KVddq4thjhIQanUvwuwg\""
+              },
+              "strict-transport-security": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "max-age=15724800; includeSubDomains"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "example": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/user/{userId}/{update-userId}": {
+      "patch": {
+        "summary": "PATCH /api/v2/user/{userId}/{update-userId}",
+        "description": "Auto-generated from observed network traffic.",
+        "tags": [
+          "api.bizcoms.ai"
+        ],
+        "parameters": [
+          {
+            "name": "update-userId",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier for the update-user resource.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier for the user resource.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "HTTP 200 response",
+            "headers": {
+              "date": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Tue, 21 Oct 2025 14:23:49 GMT"
+              },
+              "content-type": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "application/json; charset=utf-8"
+              },
+              "content-length": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "826"
+              },
+              "x-powered-by": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Express"
+              },
+              "access-control-allow-origin": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "https://www.bizcoms.ai"
+              },
+              "vary": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Origin"
+              },
+              "access-control-allow-credentials": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "true"
+              },
+              "etag": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "W/\"33a-YYA/IU85Kjii3mORn2cUm8o6XtY\""
+              },
+              "strict-transport-security": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "max-age=15724800; includeSubDomains"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "example": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/wiki/getAll/{getAllId}": {
+      "get": {
+        "summary": "GET /api/v2/wiki/getAll/{getAllId}",
+        "description": "Auto-generated from observed network traffic.",
+        "tags": [
+          "api.bizcoms.ai"
+        ],
+        "parameters": [
+          {
+            "name": "getAllId",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier for the get All resource.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "HTTP 200 response",
+            "headers": {
+              "date": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Tue, 21 Oct 2025 14:26:21 GMT"
+              },
+              "content-type": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "application/json; charset=utf-8"
+              },
+              "content-length": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "175"
+              },
+              "x-powered-by": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Express"
+              },
+              "access-control-allow-origin": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "https://project.bizcoms.ai"
+              },
+              "vary": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Origin"
+              },
+              "access-control-allow-credentials": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "true"
+              },
+              "etag": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "W/\"af-R0gdYyCZueaiPjnXIGDioVXM5zo\""
+              },
+              "strict-transport-security": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "max-age=15724800; includeSubDomains"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "example": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/{v2Id}/allmember/ghouseorg": {
+      "get": {
+        "summary": "GET /api/v2/{v2Id}/allmember/ghouseorg",
+        "description": "Auto-generated from observed network traffic.",
+        "tags": [
+          "api.bizcoms.ai"
+        ],
+        "parameters": [
+          {
+            "name": "v2Id",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier for the v2 resource.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "HTTP 200 response",
+            "headers": {
+              "date": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Tue, 21 Oct 2025 14:24:25 GMT"
+              },
+              "content-type": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "application/json; charset=utf-8"
+              },
+              "content-length": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "900"
+              },
+              "x-powered-by": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Express"
+              },
+              "access-control-allow-origin": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "https://project.bizcoms.ai"
+              },
+              "vary": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Origin"
+              },
+              "access-control-allow-credentials": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "true"
+              },
+              "etag": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "W/\"384-a88jPExkRI7yzDKn8bNIUC9Mj5U\""
+              },
+              "strict-transport-security": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "max-age=15724800; includeSubDomains"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "example": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/{v2Id}/allmember/{allmemberId}": {
+      "get": {
+        "summary": "GET /api/v2/{v2Id}/allmember/{allmemberId}",
+        "description": "Auto-generated from observed network traffic.",
+        "tags": [
+          "api.bizcoms.ai"
+        ],
+        "parameters": [
+          {
+            "name": "allmemberId",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier for the allmember resource.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "createdBy",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "example": ""
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "example": "30"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "example": "1"
+            }
+          },
+          {
+            "name": "searchTerm",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "example": ""
+            }
+          },
+          {
+            "name": "v2Id",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier for the v2 resource.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "HTTP 200 response",
+            "headers": {
+              "date": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Tue, 21 Oct 2025 14:26:22 GMT"
+              },
+              "content-type": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "application/json; charset=utf-8"
+              },
+              "content-length": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "900"
+              },
+              "x-powered-by": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Express"
+              },
+              "access-control-allow-origin": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "https://project.bizcoms.ai"
+              },
+              "vary": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Origin"
+              },
+              "access-control-allow-credentials": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "true"
+              },
+              "etag": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "W/\"384-a88jPExkRI7yzDKn8bNIUC9Mj5U\""
+              },
+              "strict-transport-security": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "max-age=15724800; includeSubDomains"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "example": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/{v2Id}/create": {
+      "post": {
+        "summary": "POST /api/v2/{v2Id}/create",
+        "description": "Auto-generated from observed network traffic.",
+        "tags": [
+          "api.bizcoms.ai"
+        ],
+        "parameters": [
+          {
+            "name": "v2Id",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier for the v2 resource.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "org gg"
+                  },
+                  "description": {
+                    "type": "string",
+                    "example": ""
+                  },
+                  "invitation": {
+                    "type": "array",
+                    "items": {
+                      "anyOf": []
+                    },
+                    "example": []
+                  },
+                  "logo": {
+                    "type": "string",
+                    "example": ""
+                  },
+                  "private": {
+                    "type": "boolean",
+                    "example": false
+                  },
+                  "companySize": {
+                    "type": "string",
+                    "example": "11-50"
+                  },
+                  "industry": {
+                    "type": "string",
+                    "example": "Healthcare"
+                  }
+                },
+                "example": {
+                  "name": "org gg",
+                  "description": "",
+                  "invitation": [],
+                  "logo": "",
+                  "private": false,
+                  "companySize": "11-50",
+                  "industry": "Healthcare"
+                }
+              },
+              "example": {
+                "name": "org gg",
+                "description": "",
+                "invitation": [],
+                "logo": "",
+                "private": false,
+                "companySize": "11-50",
+                "industry": "Healthcare"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "HTTP 200 response",
+            "headers": {
+              "date": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Tue, 21 Oct 2025 14:22:54 GMT"
+              },
+              "content-type": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "application/json; charset=utf-8"
+              },
+              "content-length": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "501"
+              },
+              "x-powered-by": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Express"
+              },
+              "access-control-allow-origin": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "https://www.bizcoms.ai"
+              },
+              "vary": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Origin"
+              },
+              "access-control-allow-credentials": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "true"
+              },
+              "etag": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "W/\"1f5-4SezA9n9F7r1OoqfPfC/mAgu8NA\""
+              },
+              "strict-transport-security": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "max-age=15724800; includeSubDomains"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "example": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/{v2Id}/get": {
+      "post": {
+        "summary": "POST /api/v2/{v2Id}/get",
+        "description": "Auto-generated from observed network traffic.",
+        "tags": [
+          "api.bizcoms.ai"
+        ],
+        "parameters": [
+          {
+            "name": "v2Id",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier for the v2 resource.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "workspace": {
+                        "type": "null"
+                      }
+                    },
+                    "example": {
+                      "workspace": null
+                    }
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "workspace": {
+                        "type": "string",
+                        "example": "68f76524b8d13f80dc1fecb0"
+                      }
+                    },
+                    "example": {
+                      "workspace": "68f76524b8d13f80dc1fecb0"
+                    }
+                  }
+                ]
+              },
+              "example": {
+                "workspace": null
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "HTTP 200 response",
+            "headers": {
+              "date": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Tue, 21 Oct 2025 14:29:54 GMT"
+              },
+              "content-type": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "application/json; charset=utf-8"
+              },
+              "content-length": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "476"
+              },
+              "x-powered-by": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Express"
+              },
+              "access-control-allow-origin": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "https://project.bizcoms.ai"
+              },
+              "vary": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Origin"
+              },
+              "access-control-allow-credentials": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "true"
+              },
+              "etag": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "W/\"1dc-XBu2FblcIeRHuILLLrH8o5+GVFk\""
+              },
+              "strict-transport-security": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "max-age=15724800; includeSubDomains"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "example": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/{v2Id}/{collectionId}/{import-fileId}": {
+      "post": {
+        "summary": "POST /api/v2/{v2Id}/{collectionId}/{import-fileId}",
+        "description": "Auto-generated from observed network traffic.",
+        "tags": [
+          "api.bizcoms.ai"
+        ],
+        "parameters": [
+          {
+            "name": "collectionId",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier for the collection resource.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "import-fileId",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier for the import-file resource.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "v2Id",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier for the v2 resource.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "HTTP 500 response",
+            "headers": {
+              "date": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Tue, 21 Oct 2025 14:29:49 GMT"
+              },
+              "content-type": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "application/json; charset=utf-8"
+              },
+              "content-length": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "196"
+              },
+              "x-powered-by": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Express"
+              },
+              "access-control-allow-origin": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "https://project.bizcoms.ai"
+              },
+              "vary": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Origin"
+              },
+              "access-control-allow-credentials": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "true"
+              },
+              "etag": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "W/\"c4-DVlp8Mbgqctt0epTzOon3iEQIc4\""
+              },
+              "strict-transport-security": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "max-age=15724800; includeSubDomains"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "example": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/{v2Id}/{notificationId}": {
+      "get": {
+        "summary": "GET /api/v2/{v2Id}/{notificationId}",
+        "description": "Auto-generated from observed network traffic.",
+        "tags": [
+          "api.bizcoms.ai"
+        ],
+        "parameters": [
+          {
+            "name": "notificationId",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier for the notification resource.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "v2Id",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier for the v2 resource.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "HTTP 200 response",
+            "headers": {
+              "date": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Tue, 21 Oct 2025 14:24:25 GMT"
+              },
+              "content-type": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "application/json; charset=utf-8"
+              },
+              "content-length": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "1895"
+              },
+              "x-powered-by": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Express"
+              },
+              "access-control-allow-origin": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "https://project.bizcoms.ai"
+              },
+              "vary": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Origin"
+              },
+              "access-control-allow-credentials": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "true"
+              },
+              "etag": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "W/\"767-OpvMw71XIflmwz+ldztHimDB2+w\""
+              },
+              "strict-transport-security": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "max-age=15724800; includeSubDomains"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "example": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/{v2Id}/{organizationId}": {
+      "get": {
+        "summary": "GET /api/v2/{v2Id}/{organizationId}",
+        "description": "Auto-generated from observed network traffic.",
+        "tags": [
+          "api.bizcoms.ai"
+        ],
+        "parameters": [
+          {
+            "name": "archive",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "false"
+            }
+          },
+          {
+            "name": "createdBy",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "example": ""
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "example": "8"
+            }
+          },
+          {
+            "name": "organizationId",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier for the organization resource.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "example": "1"
+            }
+          },
+          {
+            "name": "searchTerm",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "example": ""
+            }
+          },
+          {
+            "name": "v2Id",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier for the v2 resource.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "HTTP 200 response",
+            "headers": {
+              "date": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Tue, 21 Oct 2025 14:24:20 GMT"
+              },
+              "x-powered-by": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Express"
+              },
+              "access-control-allow-origin": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "https://www.bizcoms.ai"
+              },
+              "vary": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Origin"
+              },
+              "access-control-allow-credentials": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "true"
+              },
+              "strict-transport-security": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "max-age=15724800; includeSubDomains"
+              },
+              "content-type": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "application/json; charset=utf-8"
+              },
+              "content-length": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "7550"
+              },
+              "etag": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "W/\"1d7e-r4SafKSbc8NAwq06dqqJmJVEcKs\""
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "example": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/{v2Id}/{organizationId}/archive": {
+      "patch": {
+        "summary": "PATCH /api/v2/{v2Id}/{organizationId}/archive",
+        "description": "Auto-generated from observed network traffic.",
+        "tags": [
+          "api.bizcoms.ai"
+        ],
+        "parameters": [
+          {
+            "name": "organizationId",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier for the organization resource.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "v2Id",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier for the v2 resource.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "HTTP 200 response",
+            "headers": {
+              "date": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Tue, 21 Oct 2025 14:22:22 GMT"
+              },
+              "content-type": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "application/json; charset=utf-8"
+              },
+              "content-length": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "68"
+              },
+              "x-powered-by": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Express"
+              },
+              "access-control-allow-origin": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "https://www.bizcoms.ai"
+              },
+              "vary": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Origin"
+              },
+              "access-control-allow-credentials": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "true"
+              },
+              "etag": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "W/\"44-oPBm0ifawGALohAhf0bLF/q18cA\""
+              },
+              "strict-transport-security": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "max-age=15724800; includeSubDomains"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "example": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/{v2Id}/{organizationId}/favorite": {
+      "patch": {
+        "summary": "PATCH /api/v2/{v2Id}/{organizationId}/favorite",
+        "description": "Auto-generated from observed network traffic.",
+        "tags": [
+          "api.bizcoms.ai"
+        ],
+        "parameters": [
+          {
+            "name": "organizationId",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier for the organization resource.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "v2Id",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier for the v2 resource.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "HTTP 200 response",
+            "headers": {
+              "date": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Tue, 21 Oct 2025 14:21:18 GMT"
+              },
+              "content-type": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "application/json; charset=utf-8"
+              },
+              "content-length": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "74"
+              },
+              "x-powered-by": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Express"
+              },
+              "access-control-allow-origin": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "https://www.bizcoms.ai"
+              },
+              "vary": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Origin"
+              },
+              "access-control-allow-credentials": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "true"
+              },
+              "etag": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "W/\"4a-Ssehe6WHSayQJ7agGj/XMZf637s\""
+              },
+              "strict-transport-security": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "max-age=15724800; includeSubDomains"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "example": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/{v2Id}/{organizationId}/{singleorganizationId}": {
+      "get": {
+        "summary": "GET /api/v2/{v2Id}/{organizationId}/{singleorganizationId}",
+        "description": "Auto-generated from observed network traffic.",
+        "tags": [
+          "api.bizcoms.ai"
+        ],
+        "parameters": [
+          {
+            "name": "organizationId",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier for the organization resource.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "singleorganizationId",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier for the singleorganization resource.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "v2Id",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier for the v2 resource.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "HTTP 200 response",
+            "headers": {
+              "date": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Tue, 21 Oct 2025 14:21:23 GMT"
+              },
+              "content-type": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "application/json; charset=utf-8"
+              },
+              "content-length": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "44078"
+              },
+              "x-powered-by": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Express"
+              },
+              "access-control-allow-origin": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "https://www.bizcoms.ai"
+              },
+              "vary": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Origin"
+              },
+              "access-control-allow-credentials": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "true"
+              },
+              "etag": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "W/\"ac2e-A7JQZdG9qi0X7WwUomaBxp7hWrI\""
+              },
+              "strict-transport-security": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "max-age=15724800; includeSubDomains"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "example": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
