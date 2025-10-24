@@ -1,0 +1,555 @@
+
+openapi: 3.0.3
+info:
+  title: Uber Eats Marketplace API (Unofficial)
+  description: |
+    OpenAPI 3.0 spec compiled from Uber Eats Marketplace public docs as of 2025‑10‑24.
+    This file is **not** affiliated with Uber. Some schemas are simplified for brevity.
+  version: "0.1.0"
+  contact:
+    name: Uber Developers (official docs)
+    url: https://developer.uber.com/docs/eats
+servers:
+  - url: https://api.uber.com
+    description: Uber production API
+tags:
+  - name: Menu
+    description: Menu retrieval and management
+  - name: Orders
+    description: Order retrieval and lifecycle actions
+  - name: Webhooks
+    description: Incoming events from Uber to your service
+paths:
+  /v2/eats/stores/{store_id}/menus:
+    get:
+      tags: [Menu]
+      summary: Retrieve Menu
+      description: Retrieve the full menu for a store.
+      operationId: getMenu
+      security:
+        - oauth2:
+            - eats.store
+      parameters:
+        - in: path
+          name: store_id
+          required: true
+          schema:
+            type: string
+          description: Uber Eats store ID
+        - in: query
+          name: menu_type
+          description: Menu type to return.
+          schema:
+            type: string
+            enum: [MENU_TYPE_FULFILLMENT_DELIVERY, MENU_TYPE_FULFILLMENT_PICK_UP, MENU_TYPE_FULFILLMENT_DINE_IN]
+      responses:
+        '200':
+          description: Menu retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MenuConfiguration'
+    put:
+      tags: [Menu]
+      summary: Upsert Menu (Upload entire menu)
+      description: Create or fully replace a store's menu.
+      operationId: upsertMenu
+      security:
+        - oauth2:
+            - eats.store
+      parameters:
+        - in: path
+          name: store_id
+          required: true
+          schema:
+            type: string
+          description: Uber Eats store ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MenuConfiguration'
+      responses:
+        '204':
+          description: Menu accepted (no content)
+  /v2/eats/stores/{store_id}/menus/items/{item_id}:
+    post:
+      tags: [Menu]
+      summary: Update Menu Item (sparse update)
+      description: Update a single item in a menu. Only provided fields will be updated.
+      operationId: updateMenuItem
+      security:
+        - oauth2:
+            - eats.store
+      parameters:
+        - in: path
+          name: store_id
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: item_id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateItemConfiguration'
+      responses:
+        '204':
+          description: Item updated (no content)
+  /v2/eats/order/{order_id}:
+    get:
+      tags: [Orders]
+      summary: Get Order Details
+      description: Retrieve the full details for an order.
+      operationId: getOrderDetails
+      # Either scope is acceptable per docs
+      security:
+        - oauth2: [eats.store.orders.read]
+        - oauth2: [eats.order]
+      parameters:
+        - in: path
+          name: order_id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Order retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderDetails'
+  /v1/eats/stores/{store_id}/created-orders:
+    get:
+      tags: [Orders]
+      summary: List Created Orders
+      description: List orders currently in the CREATED state for a store.
+      operationId: listCreatedOrders
+      security:
+        - oauth2: [eats.store.orders.read]
+      parameters:
+        - in: path
+          name: store_id
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+      responses:
+        '200':
+          description: A list of orders in CREATED state
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  orders:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/OrderSummary'
+  /v1/eats/stores/{store_id}/canceled-orders:
+    get:
+      tags: [Orders]
+      summary: List Canceled Orders (last 2h)
+      description: List orders in the CANCELED state within the last 2 hours.
+      operationId: listCanceledOrders
+      security:
+        - oauth2: [eats.store.orders.read]
+        - oauth2: [eats.order]
+        - oauth2: [eats.deliveries]
+      parameters:
+        - in: path
+          name: store_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of orders in CANCELED state
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  orders:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/OrderSummary'
+  /v1/eats/orders/{order_id}/accept_pos_order:
+    post:
+      tags: [Orders]
+      summary: Accept Order
+      description: Accept an order on behalf of the merchant.
+      operationId: acceptOrder
+      security:
+        - oauth2: [eats.order]
+      parameters:
+        - in: path
+          name: order_id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AcceptOrderRequest'
+      responses:
+        '204':
+          description: Order accepted (no content)
+  /v1/eats/orders/{order_id}/deny_pos_order:
+    post:
+      tags: [Orders]
+      summary: Deny Order
+      description: Reject an incoming order on behalf of the merchant.
+      operationId: denyOrder
+      security:
+        - oauth2: [eats.order]
+      parameters:
+        - in: path
+          name: order_id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DenyOrderRequest'
+      responses:
+        '204':
+          description: Order denied (no content)
+  /v1/eats/orders/{order_id}/cancel:
+    post:
+      tags: [Orders]
+      summary: Cancel Order
+      description: Cancel a live order by its UUID.
+      operationId: cancelOrder
+      security:
+        - oauth2: [eats.order]
+        - oauth2: [eats.deliveries]
+      parameters:
+        - in: path
+          name: order_id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CancelOrderRequest'
+      responses:
+        '200':
+          description: Cancellation acknowledged
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Empty object per docs
+                additionalProperties: false
+
+x-webhooks:
+  orders.notification:
+    post:
+      tags: [Webhooks]
+      summary: Order Notification (Uber → your service)
+      description: >
+        Fired when an order is placed. Respond **200 OK** with an empty body.
+        Verify the `X-Uber-Signature` HMAC SHA256 of the raw body using your client secret.
+      operationId: webhookOrdersNotification
+      parameters:
+        - in: header
+          name: X-Environment
+          required: false
+          schema:
+            type: string
+            enum: [production, sandbox]
+          description: Indicates the sending environment
+        - in: header
+          name: X-Uber-Signature
+          required: true
+          schema:
+            type: string
+          description: HMAC SHA256 signature (lowercase hex) of the request body using your client secret.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrdersNotificationEvent'
+      responses:
+        '200':
+          description: Acknowledge receipt
+        '4XX':
+          description: Non-200 responses will trigger retries with exponential backoff (max 7 attempts)
+
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://auth.uber.com/oauth/v2/token
+          scopes:
+            eats.store: Read/update store & menu data
+            eats.store.status.write: Update store availability status
+            eats.order: Accept/Deny/Cancel orders and read v1 orders
+            eats.store.orders.read: Read order data (v2)
+            eats.report: Access store reports
+            eats.deliveries: Uber Direct/Deliveries scope for some order endpoints
+        authorizationCode:
+          authorizationUrl: https://auth.uber.com/oauth/v2/authorize
+          tokenUrl: https://auth.uber.com/oauth/v2/token
+          scopes:
+            eats.pos_provisioning: Activate/remove POS integration & discover stores
+  schemas:
+    MultiLanguageText:
+      type: object
+      description: Map of locale code to text (e.g., en_us).
+      additionalProperties:
+        type: string
+    TimePeriod:
+      type: object
+      properties:
+        start_time:
+          type: string
+          example: "08:30"
+        end_time:
+          type: string
+          example: "23:00"
+      required: [start_time, end_time]
+    ServiceAvailability:
+      type: object
+      properties:
+        day_of_week:
+          type: string
+          enum: [monday, tuesday, wednesday, thursday, friday, saturday, sunday]
+        time_periods:
+          type: array
+          items:
+            $ref: '#/components/schemas/TimePeriod'
+      required: [day_of_week, time_periods]
+    MenuEntity:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum: [ITEM, MODIFIER_GROUP]
+      required: [id, type]
+    Category:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          $ref: '#/components/schemas/MultiLanguageText'
+        subtitle:
+          $ref: '#/components/schemas/MultiLanguageText'
+        entities:
+          type: array
+          items:
+            $ref: '#/components/schemas/MenuEntity'
+      required: [id, title, entities]
+    PriceRules:
+      type: object
+      properties:
+        price:
+          type: integer
+          description: Price in the smallest currency unit (e.g., cents)
+        core_price:
+          type: integer
+          description: Intrinsic value; must be >= price
+        container_deposit:
+          type: integer
+        overrides:
+          type: array
+          items:
+            type: object
+            properties:
+              context_type:
+                type: string
+                enum: [MENU, ITEM, MODIFIER_GROUP]
+              context_value:
+                type: string
+              price:
+                type: integer
+    Item:
+      type: object
+      properties:
+        id: { type: string }
+        external_data: { type: string }
+        title: { $ref: '#/components/schemas/MultiLanguageText' }
+        description: { $ref: '#/components/schemas/MultiLanguageText' }
+        image_url: { type: string, format: uri }
+        price_info: { $ref: '#/components/schemas/PriceRules' }
+        modifier_group_ids:
+          type: array
+          items: { type: string }
+      required: [id, title, price_info]
+      additionalProperties: true
+    ModifierGroup:
+      type: object
+      description: Simplified representation of a modifier group.
+      properties:
+        id: { type: string }
+        title: { $ref: '#/components/schemas/MultiLanguageText' }
+        item_ids:
+          type: array
+          items: { type: string }
+      required: [id, title, item_ids]
+    Menu:
+      type: object
+      properties:
+        id: { type: string }
+        title: { $ref: '#/components/schemas/MultiLanguageText' }
+        subtitle: { $ref: '#/components/schemas/MultiLanguageText' }
+        service_availability:
+          type: array
+          items: { $ref: '#/components/schemas/ServiceAvailability' }
+        category_ids:
+          type: array
+          items: { type: string }
+      required: [id, title, service_availability, category_ids]
+    MenuConfiguration:
+      type: object
+      properties:
+        menus:
+          type: array
+          items: { $ref: '#/components/schemas/Menu' }
+        categories:
+          type: array
+          items: { $ref: '#/components/schemas/Category' }
+        items:
+          type: array
+          items: { $ref: '#/components/schemas/Item' }
+        modifier_groups:
+          type: array
+          items: { $ref: '#/components/schemas/ModifierGroup' }
+        menu_type:
+          type: string
+          enum: [MENU_TYPE_FULFILLMENT_DELIVERY, MENU_TYPE_FULFILLMENT_PICK_UP, MENU_TYPE_FULFILLMENT_DINE_IN]
+      required: [menus, categories, items, modifier_groups]
+    UpdateItemConfiguration:
+      type: object
+      properties:
+        price_info: { $ref: '#/components/schemas/PriceRules' }
+        suspension_info:
+          type: object
+          properties:
+            suspension:
+              type: object
+              properties:
+                suspend_until: { type: integer, description: Unix timestamp (seconds) }
+                reason: { type: string }
+        menu_type:
+          type: string
+          enum: [MENU_TYPE_FULFILLMENT_DELIVERY, MENU_TYPE_FULFILLMENT_PICK_UP, MENU_TYPE_FULFILLMENT_DINE_IN]
+      additionalProperties: true
+    AcceptOrderRequest:
+      type: object
+      properties:
+        reason:
+          type: string
+          example: Accepted by Rosie F.
+        pickup_time:
+          type: integer
+          description: Unix epoch seconds when order will be ready
+        external_reference_id:
+          type: string
+        fields_relayed:
+          type: object
+          properties:
+            order_special_instructions: { type: boolean }
+            item_special_instructions: { type: boolean }
+            item_special_requests: { type: boolean }
+            promotions: { type: boolean }
+        order_pickup_instructions:
+          type: string
+    DenyReason:
+      type: object
+      properties:
+        explanation: { type: string }
+        code:
+          type: string
+          enum:
+            - STORE_CLOSED
+            - POS_NOT_READY
+            - POS_OFFLINE
+            - ITEM_AVAILABILITY
+            - MISSING_ITEM
+            - MISSING_INFO
+            - PRICING
+            - CAPACITY
+            - ADDRESS
+            - SPECIAL_INSTRUCTIONS
+            - OTHER
+        out_of_stock_items:
+          type: array
+          items: { type: string }
+        invalid_items:
+          type: array
+          items: { type: string }
+      required: [explanation, code]
+    DenyOrderRequest:
+      type: object
+      properties:
+        reason:
+          $ref: '#/components/schemas/DenyReason'
+      required: [reason]
+    CancelOrderRequest:
+      type: object
+      properties:
+        reason:
+          type: string
+          enum:
+            - OUT_OF_ITEMS
+            - KITCHEN_CLOSED
+            - CUSTOMER_CALLED_TO_CANCEL
+            - RESTAURANT_TOO_BUSY
+            - CANNOT_COMPLETE_CUSTOMER_NOTE
+            - OTHER
+        details:
+          type: string
+          description: Provide when reason is OTHER.
+        cancelling_party:
+          type: string
+          enum: [MERCHANT, CUSTOMER]
+          description: Used for Uber Direct (Deliveries).
+    OrderSummary:
+      type: object
+      properties:
+        id: { type: string }
+        current_state: { type: string, example: CREATED }
+        placed_at: { type: string, format: date-time }
+      required: [id, current_state, placed_at]
+    OrderDetails:
+      type: object
+      description: >
+        Full order object. Schema trimmed to common fields; additional properties may be present.
+        See official docs for the complete structure.
+      properties:
+        id: { type: string }
+        current_state: { type: string }
+        placed_at: { type: string, format: date-time }
+      additionalProperties: true
